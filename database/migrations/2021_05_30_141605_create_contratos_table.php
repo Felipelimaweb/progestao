@@ -16,10 +16,10 @@ class CreateContratosTable extends Migration
         
         Schema::create('contratos', function (Blueprint $table) {
             $table->bigIncrements( column:'id');
-            $table->foreignId('clientes_id')->constrained();
-            $table->foreignId('prestadors_id')->constrained();
-            $table->foreignId('fornecedors_id')->constrained();
-            $table->foreignId('funcionarios_id')->constrained();
+            $table->foreignId('cliente_id')->nullable()->constrained();
+            $table->foreignId('prestador_id')->nullable()->constrained();
+            $table->foreignId('fornecedor_id')->nullable()->constrained();
+            $table->foreignId('funcionario_id')->nullable()->constrained();
             $table->string( column:'nome');
             $table->string( column:'data');
             $table->string( column:'tipo');

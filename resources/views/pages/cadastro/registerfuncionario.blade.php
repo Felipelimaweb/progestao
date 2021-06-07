@@ -80,39 +80,57 @@
                             </div>
                             @endif
 
-                            <div class="custom-control custom-radio custom-control-inline ml-0">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=IPTVBRASIL>
+                            <div class="form-group custom-radio custom-control-inline ml-0">
+                                <input type="radio" required name="sede" class="custom-control-input1" value=IPTVBRASIL>
                                 <label class="custom-control-label1" for="123">  IPTVBRASIL</label>
 
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline ml-0 mb-3">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
+                            <div class="form-group custom-radio custom-control-inline ml-0 mb-3">
+                                <input type="radio" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
                                 <label class="custom-control-label1" for="1234">  PRÓEMPRESA</label>
                             </div>
 
                             <div class="form-group ml-1">
                                 <label for="">Nome</label>
-                                <input type="text" class="form-control" name="nome">
+                                <input type="text" class="form-control @if($errors->has('nome')) is-invalid @endif" name="nome">
+                                <div class="invalid-feedback">
+                                    <p>Nome é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">CPF</label>
-                                <input type="text" class="form-control" name="cpf" placeholder="123.456.789-00" onkeypress="$(cpf).mask('000.000.000-00')">
+                                <input type="text" class="form-control @if($errors->has('cpf')) is-invalid @endif" name="cpf" placeholder="123.456.789-00" onkeypress="$(cpf).mask('000.000.000-00')">
+                                <div class="invalid-feedback">
+                                    <p>CPF é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">E-Mail</label>
-                                <input type="text" class="form-control" name="email" placeholder="PróEmpre@infproempresa.com.br">
+                                <input type="text" class="form-control @if($errors->has('email')) is-invalid @endif" name="email" placeholder="PróEmpre@infproempresa.com.br">
+                                <div class="invalid-feedback">
+                                    <p>E-Mail é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">Telefone</label>
-                                <input type="text" class="form-control" name="telefone" placeholder="(61) 98544-1862" onkeypress="$(telefone).mask('(00) 00000-0000')">
+                                <input type="text" class="form-control @if($errors->has('telefone')) is-invalid @endif" name="telefone" placeholder="(61) 98544-1862" onkeypress="$(telefone).mask('(00) 00000-0000')">
+                                <div class="invalid-feedback">
+                                    <p>Telefone é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">Cargo</label>
-                                <input type="text" class="form-control" name="cargo" >
+                                <input type="text" class="form-control @if($errors->has('cargo')) is-invalid @endif" name="cargo" >
+                                <div class="invalid-feedback">
+                                    <p>Cargo é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">Salario</label>
-                                <input type="text" class="form-control" name="salario" placeholder="R$" onkeypress="$(salario).mask('R$ #.##0,00', {reverse: true});">
+                                <input type="text" class="form-control @if($errors->has('salario')) is-invalid @endif" name="salario" placeholder="R$" onkeypress="$(salario).mask('R$ #.##0,00', {reverse: true});">
+                                <div class="invalid-feedback">
+                                    <p>Salario é Obrigatório</p>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
 

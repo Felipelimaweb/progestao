@@ -79,23 +79,29 @@
                             </div>
                             @endif
 
-                            <div class="custom-control custom-radio custom-control-inline ml-0">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=IPTVBRASIL>
-                                <label class="custom-control-label1" for="123">  IPTVBRASIL</label>
+                            <div class="form-group custom-control-inline ml-0">
+                                <input type="radio" class="custom-control-input1"  name="sede" value=IPTVBRASIL>
+                                <label class="custom-control-label1">  IPTVBRASIL</label>
 
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline ml-0 mb-3">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
-                                <label class="custom-control-label1" for="1234">  PRÓEMPRESA</label>
+                            <div class="form-group custom-control-inline ml-0 mb-3">
+                                <input type="radio" required class="custom-control-input1" name="sede" value=PRÓEMPRESA>
+                                <label class="custom-control-label1">  PRÓEMPRESA</label>
                             </div>
 
                             <div class="form-group ml-1">
                                 <label for="">Nome</label>
-                                <input type="text" class="form-control" name="nome">
+                                <input type="text" class="form-control @if($errors->has('nome')) is-invalid @endif" name="nome">
+                                <div class="invalid-feedback">
+                                    <p>Nome é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">CNPJ</label>
-                                <input type="text" class="form-control" name="cnpj" placeholder="12.345.678/0001-00" onkeypress="$(cnpj).mask('00.000.000/000-00')">
+                                <input type="text" class="form-control @if($errors->has('cnpj')) is-invalid @endif" name="cnpj" placeholder="12.345.678/0001-00" onkeypress="$(cnpj).mask('00.000.000/0000-00')">
+                                <div class="invalid-feedback">
+                                    <p>CNPJ é Obrigatório</p>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
 

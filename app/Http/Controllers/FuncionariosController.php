@@ -9,6 +9,15 @@ class FuncionariosController extends Controller
 {
     public function store(Request $request)
     {
+        //validação do cadastro
+        $request->validate([
+            'nome' => 'required',
+            'cpf' => 'required',
+            'email' => 'required',
+            'telefone' => 'required',
+            'cargo' => 'required',
+            'salario' => 'required',
+        ]);
         Funcionario::create([
             'sede' =>$request->sede,
             'nome' =>$request->nome,

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Contrato;
 use App\Models\Fornecedor;
-use DB;
+use App\Models\Funcionario;
+use App\Models\Prestador;
 use Illuminate\Http\Request;
 
 class ContratosController extends Controller
@@ -13,6 +14,12 @@ class ContratosController extends Controller
 
     public function store(Request $request)
     {
+        //validação do cadastro
+        $request->validate([
+            'nome' => 'required',
+            'data' => 'required',
+        ]);
+
         Contrato::create([
             'nome' => $request->nome,
             'data' => $request->data,
@@ -25,21 +32,31 @@ class ContratosController extends Controller
         return back()->withStatus(__('Contrato cadastrado com sucesso.'));;
     }
 
-    public function show(){
-
-        $clientes = (new \App\Models\Cliente())->getTable();
-        $fornecedores = (new \App\Models\Fornecedor)->getTable();
-        $funcionarios = (new \App\Models\Funcionario())->getTable();
-        $prestadores = (new \App\Models\Prestador())->getTable();
+    public function show123()
+    {
+        
+        $contrato = Contrato::with('Cliente')->get();
+        $clientes = Cliente::with('Contrato')->get();
+        
         $clientestabela = Cliente::all();
-        return view('pages.contrato', compact('clientes', 'fornecedores', 'funcionarios', 'prestadores','clientestabela'));
-       
+        $contratotabela = Contrato::all();
+        $fornecedortabela = Fornecedor::all();
+        $funcionariotabela = Funcionario::all();
+        $prestadortabela = Prestador::all();
+        return view('pages.cadastro.register', compact('clientes', 'contrato','clientestabela', 'fornecedortabela', 'funcionariotabela', 'prestadortabela','contratotabela'));
+        
     }
 
-    public function cliente(){
+   
 
-        
+    public function show()
+    {
 
+        $clientestabela = Cliente::all();
+        $fornecedortabela = Fornecedor::all();
+        $funcionariotabela = Funcionario::all();
+        $prestadortabela = Prestador::all();
+        return view('pages.contrato', compact('clientestabela', 'fornecedortabela', 'funcionariotabela', 'prestadortabela'));
     }
 
     public function destroy($id)

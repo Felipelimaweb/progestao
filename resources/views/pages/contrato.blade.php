@@ -53,6 +53,7 @@
         </div>
         <!-- Conteudo da Pagina -->
         <div class="container-fluid mt--7">
+
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -79,36 +80,73 @@
                                 </button>
                             </div>
                             @endif
-                            <div class="form-group">
-                                <select id="selecionartabela" class="form-control">
-                                    <option>
-                                        <p>Selecione o Tipo</p>
-                                    </option>
-                                    <option>{{$clientes}}</option>
-                                    <option>{{$fornecedores}}</option>
-                                    <option>{{$funcionarios}}</option>
-                                    <option>{{$prestadores}}</option>
+
+                            <!--  Inicio Script Modelo   -->
+                            <div class="form-group ml-1">
+                                <select name="tipo" id="tipo" class="form-control">
+
+                                    <option value="0">Selecione o Tipo</option>
+                                    <option value="cli">Cliente</option>
+                                    <option value="for">Fornecedor</option>
+                                    <option value="fun">Funcionario</option>
+                                    <option value="pre">Prestador</option>
 
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Selecione o cliente/funcionario/fornecedor/prestador</label><br>
-                                <select id="buscatabela" style="width:100%">
+                            <div id="showcliente" class="form-group-md-2">
+                                <div class="form-group">
+                                    <select id="buscacliente" class="form-control">
+                                        <option>Selecione o Cliente:</option>
+                                        @foreach ($clientestabela as $cliente)
+                                        <option>{{$cliente->nome}}</option>
+                                        @endforeach
 
-                                    @foreach ($clientestabela as $cliente)
-                                    <option>Selecione o:</option>
-
-                                    <option>{{$cliente->nome}}</option>
-                                    @endforeach
-
-                                </select>
+                                    </select>
+                                </div>
                             </div>
+                            <div id="showfornecedor" class="form-group-md-2">
+                                <div class="form-group">
+                                    <select id="buscafornecedor" class="form-control">
+                                        <option>Selecione o Fornecedor:</option>
+                                        @foreach ($fornecedortabela as $fornecedor)
+                                        <option>{{$fornecedor->nome}}</option>
+                                        @endforeach
 
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="showfuncionario" class="form-group-md-2">
+                                <div class="form-group">
+                                    <select id="buscafuncionario" class="form-control">
+                                        <option>Selecione o Funcionario:</option>
+                                        @foreach ($funcionariotabela as $funcionario)
+                                        <option>{{$funcionario->nome}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="showprestador" class="form-group-md-2">
+                                <div class="form-group">
+                                    <select id="buscaprestador" class="form-control">
+                                        <option>Selecione o Prestador:</option>
+                                        @foreach ($prestadortabela as $prestador)
+                                        <option>{{$prestador->nome}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+                            <!--  Final Script Modelo   -->
 
                             <div class="form-group ml-1">
                                 <label>Nome ou Numero do Contrato</label>
-                                <input type="text" class="form-control" name="nome" id="cnpj" onkeypress="$(cnpj).mask('000.000-000')">
+                                <input type="text" class="form-control @if($errors->has('nome')) is-invalid @endif" name="nome">
+                                <div class="invalid-feedback">
+                                    <p>Nome ou Numero do Contrato é Obrigatório</p>
+                                </div>
                             </div>
+
                             <div class="form-group ml-1">
                                 <label>Data de Inicio</label>
                                 <input class="form-control" type="date" name="data">
@@ -171,7 +209,7 @@
     <!-- Argon JS -->
     <script src="../assets/js/argon.js?v=1.2.0"></script>
     <script>
-        $('#nameField').css('display', 'block'); // Hide the text input box in default
+        $('#nameField').css('display', 'block'); // Esconde a caixa de texto por padrão
         function myFunction() {
             if ($('#showField').prop('checked')) {
                 $('#nameField').css('display', 'none');
@@ -180,16 +218,53 @@
             }
         }
     </script>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script type="text/javascript">
-        $("#buscatabela").select2({
-            placeholder: 'Selecione o cliente'
+        $("#buscacliente").select2();
+        $("#buscafornecedor").select2();
+        $("#buscafuncionario").select2();
+        $("#buscaprestador").select2();
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#showcliente').closest('div').hide();
+            $('#showfornecedor').closest('div').hide();
+            $('#showfuncionario').closest('div').hide();
+            $('#showprestador').closest('div').hide();
+            $('#tipo').change(function() {
+                var tipoescolhido = $('#tipo option:selected').text();
+                if (tipoescolhido == 'Cliente') {
+                    debugger
+                    $('#showcliente').closest('div').show();
+                } else {
+                    $('#showcliente').closest('div').hide();
+                }
+                if (tipoescolhido == 'Fornecedor') {
+                    debugger
+                    $('#showfornecedor').closest('div').show();
+                } else {
+                    $('#showfornecedor').closest('div').hide();
+                }
+                if (tipoescolhido == 'Funcionario') {
+                    debugger
+                    $('#showfuncionario').closest('div').show();
+                } else {
+                    $('#showfuncionario').closest('div').hide();
+                }
+                if (tipoescolhido == 'Prestador') {
+                    debugger
+                    $('#showprestador').closest('div').show();
+                } else {
+                    $('#showprestador').closest('div').hide();
+                }
+
+
+            });
         });
     </script>
-    
-
 </body>
 
 </html>

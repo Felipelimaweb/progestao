@@ -15,6 +15,11 @@ class FornecedoresController extends Controller
 
     public function store(Request $request)
     {
+        //validação do cadastro
+        $request->validate([
+            'nome' => 'required',
+            'cnpj' => 'required',
+        ]);
         Fornecedor::create([
             'sede' =>$request->sede,
             'nome' =>$request->nome,

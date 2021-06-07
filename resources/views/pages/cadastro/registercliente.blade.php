@@ -82,23 +82,32 @@
                             </div>
                             @endif
 
-                            <div class="custom-control custom-radio custom-control-inline ml-0">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=IPTVBRASIL>
-                                <label class="custom-control-label1" for="123">  IPTVBRASIL</label>
+                            <div class="form-group custom-control-inline ml-0">
+                                <input type="radio" class="custom-control-input1"  name="sede" value=IPTVBRASIL>
+                                <label class="custom-control-label1">  IPTVBRASIL</label>
 
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline ml-0 mb-3">
-                                <input type="checkbox" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
-                                <label class="custom-control-label1" for="1234">  PRÓEMPRESA</label>
+                            <div class="form-group custom-control-inline ml-0 mb-3">
+                                <input type="radio" required class="custom-control-input1 @if($errors->has('sede')) is-invalid @endif" name="sede" value=PRÓEMPRESA>
+                                <label class="custom-control-label1">  PRÓEMPRESA</label>
+                                <div class="invalid-feedback">
+                                    <p>Sede é Obrigatório</p>
+                                </div>
                             </div>
 
                             <div class="form-group ml-1">
                                 <label for="">Nome</label>
-                                <input type="text" class="form-control" name="nome">
+                                <input type="text" class="form-control @if($errors->has('nome')) is-invalid @endif" name="nome">
+                                <div class="invalid-feedback">
+                                    <p>Nome é Obrigatório</p>
+                                </div>
                             </div>
                             <div class="form-group ml-1">
                                 <label for="">CNPJ</label>
-                                <input type="text" class="form-control" name="cnpj">
+                                <input type="text" class="form-control @if($errors->has('cnpj')) is-invalid @endif" name="cnpj" placeholder="12.345.678/0001-00" onkeypress="$(cnpj).mask('00.000.000/0000-00')">
+                                <div class="invalid-feedback">
+                                    <p>CNPJ é Obrigatório</p>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
 
@@ -203,6 +212,7 @@
     <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
     <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <!-- Argon JS -->
     <script src="../assets/js/argon.js?v=1.2.0"></script>
 </body>

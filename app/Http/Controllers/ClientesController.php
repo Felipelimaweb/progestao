@@ -15,6 +15,11 @@ class ClientesController extends Controller
 
     public function store(Request $request)
     {
+        //validação do cadastro
+        $request->validate([
+            'nome' => 'required',
+            'cnpj' => 'required',
+        ]);
         Cliente::create([
             'sede' =>$request->sede,
             'nome' =>$request->nome,

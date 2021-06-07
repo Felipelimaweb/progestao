@@ -81,9 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('Receitas', [ClientesController::class, 'show1'])->name('showreceita');
 
-	Route::get('Cadastro', function () {
-		return view('pages.register');
-	})->name('register');
+	Route::get('Cadastro', [ContratosController::class, 'show123'])->name('register');
 
 	Route::get('Cadastro-Cliente', [ClientesController::class, 'show'])->name('registercliente');
 	

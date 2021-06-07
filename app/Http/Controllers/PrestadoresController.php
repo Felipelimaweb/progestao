@@ -11,6 +11,11 @@ class PrestadoresController extends Controller
 
     public function store(Request $request)
     {
+        //validação do cadastro
+        $request->validate([
+            'nome' => 'required',
+            'cnpj' => 'required',
+        ]);
         Prestador::create([
             'sede' =>$request->sede,
             'nome' =>$request->nome,
