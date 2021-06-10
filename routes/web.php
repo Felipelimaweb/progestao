@@ -26,19 +26,23 @@ Route::get('Despesas', [ConsumiveisController::class, 'show'])->name('showdespes
 /* Rotas do cliente */
 Route::post('cadastrocliente/novo', [ClientesController::class, 'store'])->name('salvar_cliente');
 Route::get('cadastrocliente/del/{id}', [ClientesController::class, 'destroy'])->name('excluir_cliente');
-Route::put('cadastrocliente/up/{id}', [ClientesController::class, 'update'])->name('update_cliente');
+Route::get('cadastrocliente/{id}', [ClientesController::class, 'edit'])->name('editar_cliente');
+Route::post('cadastrocliente/{id}', [ClientesController::class, 'update'])->name('atualizar_cliente');
 /* Rotas do prestador */
 Route::post('cadastroprestador/novo', [PrestadoresController::class, 'store'])->name('salvar_prestador');
 Route::get('cadastroprestador/del/{id}', [PrestadoresController::class, 'destroy'])->name('excluir_prestador');
-Route::put('cadastroprestador/up/{id}', [PrestadoresController::class, 'update'])->name('update_prestador');
+Route::get('cadastroprestador/{id}', [PrestadoresController::class, 'edit'])->name('editar_prestador');
+Route::post('cadastroprestador/{id}', [PrestadoresController::class, 'update'])->name('atualizar_prestador');
 /* Rotas do fornecedor */
 Route::post('cadastrofornecedor/novo', [FornecedoresController::class, 'store'])->name('salvar_fornecedor');
 Route::get('cadastrofornecedor/del/{id}', [FornecedoresController::class, 'destroy'])->name('excluir_fornecedor');
-Route::put('cadastrofornecedor/up/{id}', [FornecedoresController::class, 'update'])->name('update_fornecedor');
+Route::get('cadastrofornecedor/{id}', [FornecedoresController::class, 'edit'])->name('editar_fornecedor');
+Route::post('cadastrofornecedor/{id}', [FornecedoresController::class, 'update'])->name('atualizar_fornecedor');
 /* Rotas do funcionario */
 Route::post('cadastrofuncionario/novo', [FuncionariosController::class, 'store'])->name('salvar_funcionario');
 Route::get('cadastrofuncionario/del/{id}', [FuncionariosController::class, 'destroy'])->name('excluir_funcionario');
-Route::put('cadastrofuncionario/up/{id}', [FuncionariosController::class, 'update'])->name('update_funcionario');
+Route::get('cadastrofuncionario/{id}', [FuncionariosController::class, 'edit'])->name('editar_funcionario');
+Route::post('cadastrofuncionario/{id}', [FuncionariosController::class, 'update'])->name('atualizar_funcionario');
 /* Rotas do consumivel */
 Route::post('cadastroconsumivel/novo', [ConsumiveisController::class, 'store'])->name('salvar_consumivel');
 Route::get('cadastroconsumivel/del/{id}', [ConsumiveisController::class, 'destroy'])->name('excluir_consumivel');
@@ -46,6 +50,9 @@ Route::put('cadastroconsumivel/up/{id}', [ConsumiveisController::class, 'update'
 /* Rotas do contrato */
 Route::get('Contratos', [ContratosController::class, 'show'])->name('contrato');
 Route::post('cadastrocontrato/novo', [ContratosController::class, 'store'])->name('salvar_contrato');
+Route::get('cadastrocontrato/del/{id}', [ContratosController::class, 'destroy'])->name('excluir_contrato');
+Route::get('cadastrocontrato/{id}', [ContratosController::class, 'edit'])->name('editar_contrato');
+Route::post('cadastrocontrato/{id}', [ContratosController::class, 'update'])->name('atualizar_contrato');
 /* Rotas da notafiscal */
 Route::post('cadastronotafiscal/novo', [NotafiscalController::class, 'store'])->name('salvar_notafiscal');
 Route::get('/', function () {
@@ -74,14 +81,11 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('registroreceita');
 
 	
-
-	Route::get('Notas-Fiscais', function () {
-		return view('pages.notafiscal');
-	})->name('notafiscal');
+	Route::get('Cadastro', [ContratosController::class, 'show123'])->name('register');
+	
+	Route::get('Notas-Fiscais', [NotafiscalController::class, 'show123'])->name('notafiscal');
 
 	Route::get('Receitas', [ClientesController::class, 'show1'])->name('showreceita');
-
-	Route::get('Cadastro', [ContratosController::class, 'show123'])->name('register');
 
 	Route::get('Cadastro-Cliente', [ClientesController::class, 'show'])->name('registercliente');
 	

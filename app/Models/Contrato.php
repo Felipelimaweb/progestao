@@ -15,7 +15,8 @@ class Contrato extends Model
         'fornecedor_id',
         'funcionario_id',
         'nome',
-        'data',
+        'datainicial',
+        'datafinal',
         'tipo',
         'objeto',
         'ciclo',
@@ -28,9 +29,24 @@ class Contrato extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public $rules = [
-        'nome' => 'required|min:3|max:100',
-        'data' => 'required|min:3|max:100',
-    ];
+    public function fornecedor()
+    {
+        return $this->belongsTo(Fornecedor::class);
+    }
+
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class);
+    }
+
+    public function prestador()
+    {
+        return $this->belongsTo(Prestador::class);
+    }
+
+    public function notafiscal()
+    {
+        return $this->hasMany(Notafiscal::class);
+    }
 
 }

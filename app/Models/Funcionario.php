@@ -19,4 +19,8 @@ class Funcionario extends Model
         'salario',
     
     ];
+    public function contrato()
+    {
+        return $this->hasMany(Contrato::class);
+    }
 }

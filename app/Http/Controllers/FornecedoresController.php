@@ -37,6 +37,24 @@ class FornecedoresController extends Controller
 
     }
 
+    public function edit($id){
+        $fornecedor = Fornecedor::findOrFail($id);
+
+        return view('pages.edit.fornecedor', ['fornecedor' =>$fornecedor]);;
+
+    }
+
+    public function update(Request $request, $id){
+        $fornecedor = Fornecedor::findOrFail($id);
+        $fornecedor->update([
+            'sede' =>$request->sede,
+            'nome' =>$request->nome,
+            'cnpj' =>$request->cnpj,
+        ]);
+        return back()->withStatus2(__('Fornecedor Atualizado com sucesso.'));;
+
+    }
+
     public function destroy($id){
         $fornecedor=Fornecedor::findOrFail($id);
         $fornecedor->delete();

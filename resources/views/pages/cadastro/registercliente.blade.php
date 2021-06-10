@@ -157,7 +157,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#">Editar</a>
+                                                    <a class="dropdown-item" href="{{ route('editar_cliente', ['id'=>$cliente->id])}}">Editar</a>
                                                     <a class="dropdown-item" href="{{ route('excluir_cliente', ['id'=>$cliente->id])}}">Remover</a>
                                                     <a class="dropdown-item" href="#">Vincular Contrato</a>
                                                 </div>

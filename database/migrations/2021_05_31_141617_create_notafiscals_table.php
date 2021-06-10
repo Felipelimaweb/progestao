@@ -18,6 +18,7 @@ class CreateNotafiscalsTable extends Migration
             $table->foreignId('contratos_id')->nullable()->constrained();
             $table->string('nome');
             $table->string('valor');
+            $table->string('data');
             $table->string('confirmação');
             $table->timestamps();
         });

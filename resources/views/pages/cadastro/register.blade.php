@@ -56,14 +56,22 @@
             <div class="row">
                 <div class="col">
                     <div class="card bg-default shadow">
+                        @if (session('status1'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('status1') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         <div class="card-header bg-transparent border-0">
                             <h3 class="text-white mb-0">Contratos</h3>
                         </div>
-                        <!--  Inicio Script Modelo   -->
+                        <!--  Inicio Script Contratos   -->
                         <div class="form-group ml-1">
                             <select name="tipo" id="tipo" class="form-control">
                                 <option value="0">
-                                    <p>Cadastro de Contrato</p>
+                                    <p>Selecione o Tipo de Contrato</p>
                                 </option>
                                 <option value="cli">Cliente</option>
                                 <option value="for">Fornecedor</option>
@@ -71,166 +79,442 @@
                                 <option value="pre">Prestador</option>
                             </select>
                         </div>
-                        <div id="showcliente" class="form-group-md-2">
-                            <div class="form-group">
-                                <select id="buscatabela" class="form-control">
-                                    <option>Selecione o Cliente:</option>
-                                    @foreach ($clientestabela as $cliente)
-                                    <option>{{$cliente->nome}}</option>
-                                    @endforeach
+                        <!--  Seleção de Tabelas  -->
 
-                                </select>
+                        <div id="showcliente" class="form-group-md-2">
+                            <!--  Tabela Contrato Cliente  -->
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-dark table-flush">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="sort" data-sort="Sede">Nome do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="Nome">Cliente</th>
+                                            <th scope="col" class="sort" data-sort="CNPJ">CNPJ</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        @csrf
+                                        @if (session('status'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('status') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        @endif
+                                        @foreach ($contratocliente as $cli)
+                                        @if ($cli->cliente)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->cliente->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->cliente->cnpj}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> #Nota fiscal</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> {{$cli->valor}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="confirmacao">
+                                                        <option>Confirmado</option>
+                                                        <option>Pendente</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
+                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
+                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+
+
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer py-4">
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end mb-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="fas fa-angle-left"></i>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">
+                                                    <i class="fas fa-angle-right"></i>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
                         </div>
                         <div id="showfornecedor" class="form-group-md-2">
-                            <div class="form-group">
-                                <select id="buscatabela" class="form-control">
-                                    <option>Selecione o Fornecedor:</option>
-                                    @foreach ($fornecedortabela as $fornecedor)
-                                    <option>{{$fornecedor->nome}}</option>
-                                    @endforeach
+                            <!--  Tabela Contrato Fornecedor  -->
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-dark table-flush">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="sort" data-sort="Sede">Nome do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="Nome">Fornecedor</th>
+                                            <th scope="col" class="sort" data-sort="CNPJ">CNPJ</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        @csrf
+                                        @if (session('status'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('status') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        @endif
+                                        @foreach ($contratofornecedor as $cli)
+                                        @if ($cli->fornecedor)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->fornecedor->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->fornecedor->cnpj}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> #Nota fiscal</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> {{$cli->valor}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="confirmacao">
+                                                        <option>Confirmado</option>
+                                                        <option>Pendente</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
+                                                        <a class="dropdown-item" href="#{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
+                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
 
-                                </select>
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer py-4">
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end mb-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="fas fa-angle-left"></i>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">
+                                                    <i class="fas fa-angle-right"></i>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
                         </div>
                         <div id="showfuncionario" class="form-group-md-2">
-                            <div class="form-group">
-                                <select id="buscatabela" class="form-control">
-                                    <option>Selecione o Funcionario:</option>
-                                    @foreach ($funcionariotabela as $funcionario)
-                                    <option>{{$funcionario->nome}}</option>
-                                    @endforeach
+                            <!--  Tabela Contrato Funcionario  -->
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-dark table-flush">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="sort" data-sort="Sede">Nome do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="Nome">Funcionario</th>
+                                            <th scope="col" class="sort" data-sort="Salario">Salario</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        @csrf
+                                        @if (session('status'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('status') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        @endif
+                                        @foreach ($contratofuncionario as $cli)
+                                        @if ($cli->funcionario)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->funcionario->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->funcionario->salario}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> #Nota fiscal</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> {{$cli->valor}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="confirmacao">
+                                                        <option>Confirmado</option>
+                                                        <option>Pendente</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
+                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
+                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
 
-                                </select>
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer py-4">
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end mb-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="fas fa-angle-left"></i>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">
+                                                    <i class="fas fa-angle-right"></i>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
                         </div>
                         <div id="showprestador" class="form-group-md-2">
-                            <div class="form-group">
-                                <select id="buscatabela" class="form-control">
-                                    <option>Selecione o Prestador:</option>
-                                    @foreach ($prestadortabela as $prestador)
-                                    <option>{{$prestador->nome}}</option>
-                                    @endforeach
+                            <!--  Tabela Contrato Prestador  -->
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-dark table-flush">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="sort" data-sort="Sede">Nome do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="Nome">Prestador</th>
+                                            <th scope="col" class="sort" data-sort="CNPJ">CNPJ</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
+                                            <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
+                                            <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        @csrf
+                                        @if (session('status'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('status') }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        @endif
+                                        @foreach ($contratoprestador as $cli)
+                                        @if ($cli->prestador)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->prestador->nome}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-right"> {{$cli->prestador->cnpj}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> #Nota fiscal</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group align-items-center">
+                                                    <span class="text-right"> {{$cli->valor}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="confirmacao">
+                                                        <option>Confirmado</option>
+                                                        <option>Pendente</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
+                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
+                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
 
-                                </select>
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer py-4">
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end mb-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="fas fa-angle-left"></i>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="#">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">
+                                                    <i class="fas fa-angle-right"></i>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
                         </div>
-                        <!-- TESTE  -->
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
+
 
                     </div>
-                    <!--  Tabela de contratos   -->
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-dark table-flush">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col" class="sort" data-sort="Sede">Nome do Contrato</th>
-                                    <th scope="col" class="sort" data-sort="Nome">Cliente</th>
-                                    <th scope="col" class="sort" data-sort="CNPJ">CNPJ</th>
-                                    <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
-                                    <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
-                                    <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
-                                </tr>
-                            </thead>
-                            <tbody class="list">
-                                @csrf
-                                @if (session('status'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('status') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-                                @if (session('status1'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    {{ session('status1') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-                                @foreach ($contrato as $cli)
-                                
-                                <tr>
-                                    <td>
-                                    <div class="d-flex align-items-center">
-                                            <span class="text-right"> {{$cli->nome}}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                    <div class="d-flex align-items-center">
-                                            <span class="text-right"> {{$cli->cliente->nome}}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-right"> {{$cli->cliente->cnpj}}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group align-items-center">
-                                            <span class="text-right"> #Nota fiscal</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group align-items-center">
-                                            <span class="text-right"> {{$cli->valor}}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <select class="form-control" id="confirmacao">
-                                                <option>Confirmado</option>
-                                                <option>Pendente</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="#">Editar</a>
-                                                <a class="dropdown-item" href="#">Remover</a>
-                                                <a class="dropdown-item" href="#">Alterar Pagamento</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
 
-
-                            </tbody>
-                        </table>
-                        <div class="card-footer py-4">
-                            <nav aria-label="...">
-                                <ul class="pagination justify-content-end mb-0">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">
-                                            <i class="fas fa-angle-left"></i>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            <i class="fas fa-angle-right"></i>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>

@@ -105,6 +105,11 @@
                         <i class="ni ni-archive-2 text-black"></i> {{ __('Notas Fiscais') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">
+                        <i class="ni ni-archive-2 text-black"></i> {{ __('CadastroNotaFiscal') }}
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">

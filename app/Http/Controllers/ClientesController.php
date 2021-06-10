@@ -43,6 +43,24 @@ class ClientesController extends Controller
         return view('pages.receita', ['clientes' => $clientes]);
 
     }
+
+    public function edit($id){
+        $cliente = Cliente::findOrFail($id);
+
+        return view('pages.edit.cliente', ['cliente' =>$cliente]);;
+
+    }
+
+    public function update(Request $request, $id){
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update([
+            'sede' =>$request->sede,
+            'nome' =>$request->nome,
+            'cnpj' =>$request->cnpj,
+        ]);
+        return back()->withStatus2(__('Cliente Atualizado com sucesso.'));;
+
+    }
     
     public function destroy($id){
         $cliente=Cliente::findOrFail($id);

@@ -39,6 +39,28 @@ class FuncionariosController extends Controller
 
     }
 
+    public function edit($id){
+        $funcionario = Funcionario::findOrFail($id);
+
+        return view('pages.edit.funcionario', ['funcionario' =>$funcionario]);;
+
+    }
+
+    public function update(Request $request, $id){
+        $funcionario = Funcionario::findOrFail($id);
+        $funcionario->update([
+            'sede' =>$request->sede,
+            'nome' =>$request->nome,
+            'cpf' =>$request->cpf,
+            'email' =>$request->email,
+            'telefone' =>$request->telefone,
+            'cargo' =>$request->cargo,
+            'salario' =>$request->salario,
+        ]);
+        return back()->withStatus2(__('Funcionario Atualizado com sucesso.'));;
+
+    }
+
     public function destroy($id){
         $funcionario=Funcionario::findOrFail($id);
         $funcionario->delete();

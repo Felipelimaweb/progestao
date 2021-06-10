@@ -11,7 +11,12 @@ class Notafiscal extends Model
     protected $fillable = [
         'nome',
         'valor',
+        'data',
         'confirmação',
     
     ];
+    public function contrato()
+    {
+        return $this->belongsTo(Contrato::class);
+    }
 }

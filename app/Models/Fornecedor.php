@@ -15,5 +15,8 @@ class Fornecedor extends Model
         'cnpj',
     
     ];
-    
+    public function contrato()
+    {
+        return $this->hasMany(Contrato::class);
+    }
 }

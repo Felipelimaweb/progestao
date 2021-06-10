@@ -21,7 +21,8 @@ class CreateContratosTable extends Migration
             $table->foreignId('fornecedor_id')->nullable()->constrained();
             $table->foreignId('funcionario_id')->nullable()->constrained();
             $table->string( column:'nome');
-            $table->string( column:'data');
+            $table->string( column:'datainicial');
+            $table->string( column:'datafinal')->nullable();
             $table->string( column:'tipo');
             $table->string( column:'objeto');
             $table->string( column:'ciclo');

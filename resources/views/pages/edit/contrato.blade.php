@@ -62,24 +62,8 @@
                             <h3 class="mb-0">Cadastro</h3>
                         </div>
                         <!-- Formulario de Registro -->
-                        <form action="{{ route('salvar_contrato') }}" method="POST">
+                        <form action="{{ route('atualizar_contrato', ['id' => $contrato->id]) }}" method="POST">
                             @csrf
-                            @if (session('status'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('status') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                            @if (session('status1'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('status1') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
                             @if (session('status2'))
                             <div class="alert alert-info alert-dismissible fade show" role="alert">
                                 {{ session('status2') }}
@@ -88,68 +72,12 @@
                                 </button>
                             </div>
                             @endif
-
-                            <!--  Inicio Script Modelo   -->
-                            <div class="form-group ml-1">
-                                <select name="tipo" id="tipo" class="form-control">
-
-                                    <option value="0">Selecione o Tipo</option>
-                                    <option value="cli">Cliente</option>
-                                    <option value="for">Fornecedor</option>
-                                    <option value="fun">Funcionario</option>
-                                    <option value="pre">Prestador</option>
-
-                                </select>
-                            </div>
-                            <div id="showcliente" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscacliente" name="cliente_id" class="form-control">
-                                        <option value="">Selecione o Cliente:</option>
-                                        @foreach ($clientestabela as $cliente)
-                                        <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="showfornecedor" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscafornecedor" name="fornecedor_id" class="form-control">
-                                        <option value="">Selecione o Fornecedor:</option>
-                                        @foreach ($fornecedortabela as $fornecedor)
-                                        <option value="{{$fornecedor->id}}">{{$fornecedor->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="showfuncionario" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscafuncionario" name="funcionario_id" class="form-control">
-                                        <option value="">Selecione o Funcionario:</option>
-                                        @foreach ($funcionariotabela as $funcionario)
-                                        <option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="showprestador" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscaprestador" name="prestador_id" class="form-control">
-                                        <option value="">Selecione o Prestador:</option>
-                                        @foreach ($prestadortabela as $prestador)
-                                        <option value="{{$prestador->id}}">{{$prestador->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <!--  Final Script Modelo   -->
-
+                            
+                            <input value="{{$contrato->cliente_id}}">
+                            <input value="{{$contrato->prestador_id}}">
                             <div class="form-group ml-1">
                                 <label>Nome ou Numero do Contrato</label>
-                                <input type="text" class="form-control @if($errors->has('nome')) is-invalid @endif" name="nome">
+                                <input type="text" class="form-control" name="nome" value="{{$contrato->nome}}">
                                 <div class="invalid-feedback">
                                     <p>Nome ou Numero do Contrato é Obrigatório</p>
                                 </div>
@@ -157,12 +85,15 @@
 
                             <div class="form-group ml-1">
                                 <label>Data de Inicio</label>
-                                <input class="form-control" type="date" name="datainicial">
+                                <input class="form-control @if($errors->has('datainicial')) is-invalid @endif" type="date" name="datainicial" value="{{$contrato->datainical}}">
+                                <div class="invalid-feedback">
+                                    <p>Data é Obrigatória</p>
+                                </div>
                                 <input type="checkbox" name="showField" id="showField" value="yes" onchange="myFunction()"> 
                                 <label for="exampleFormControlInput1">Periodo Indeterminado</label>
                                 <span id="nameField">
                                     <label for="exampleFormControlInput1">Data de Termino</label>
-                                    <input class="form-control" type="date" name="datafinal">
+                                    <input class="form-control" type="date" name="datafinal" value="{{$contrato->datafinal}}">
                                 </span>
                             </div>
                             <label> Tipo de Despesa</label><br>
@@ -177,7 +108,7 @@
                             </div>
                             <div class="form-group ml-1">
                                 <label>Objeto do Contrato</label>
-                                <input class="form-control" name="objeto"></input>
+                                <input class="form-control" name="objeto" value="{{$contrato->objeto}}"></input>
                             </div>
                             <div class="form-group ml-1">
                                 <label>Ciclo de pagamento</label>
@@ -197,7 +128,7 @@
                             </div>
                             <div class="form-group ml-1">
                                 <label for="exampleFormControlInput1">Valor do Contrato</label>
-                                <input class="form-control" name="valor"></input>
+                                <input class="form-control" name="valor" value="{{$contrato->valor}}"></input>
                             </div>
 
                             <button type="submit" class="btn btn-success ">Cadastrar</button>
@@ -234,49 +165,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script type="text/javascript">
-        $("#buscacliente").select2();
-        $("#buscafornecedor").select2();
-        $("#buscafuncionario").select2();
-        $("#buscaprestador").select2();
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#showcliente').closest('div').hide();
-            $('#showfornecedor').closest('div').hide();
-            $('#showfuncionario').closest('div').hide();
-            $('#showprestador').closest('div').hide();
-            $('#tipo').change(function() {
-                var tipoescolhido = $('#tipo option:selected').text();
-                if (tipoescolhido == 'Cliente') {
-                    debugger
-                    $('#showcliente').closest('div').show();
-                } else {
-                    $('#showcliente').closest('div').hide();
-                }
-                if (tipoescolhido == 'Fornecedor') {
-                    debugger
-                    $('#showfornecedor').closest('div').show();
-                } else {
-                    $('#showfornecedor').closest('div').hide();
-                }
-                if (tipoescolhido == 'Funcionario') {
-                    debugger
-                    $('#showfuncionario').closest('div').show();
-                } else {
-                    $('#showfuncionario').closest('div').hide();
-                }
-                if (tipoescolhido == 'Prestador') {
-                    debugger
-                    $('#showprestador').closest('div').show();
-                } else {
-                    $('#showprestador').closest('div').hide();
-                }
-
-
-            });
-        });
-    </script>
+    
 </body>
 
 </html>
