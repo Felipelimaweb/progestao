@@ -33,11 +33,13 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Teste contrato</h6>
+                            <h6 class="h2 text-white d-inline-block mb-0">Contratos</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><i class="fas fa-home"></i></li>
-                                    <li class="breadcrumb-item"><a>Teste Contrato</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></a></i></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('contrato') }}">Cadastro de Contrato</a></li>
+                                    <li class="breadcrumb-item">Lista de Contratos</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('notafiscal') }}">Notas Fiscais</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -80,9 +82,9 @@
                             </select>
                         </div>
                         <!--  Seleção de Tabelas  -->
-
+                        
                         <div id="showcliente" class="form-group-md-2">
-                            <!--  Tabela Contrato Cliente  -->
+                         <!--  Tabela Contrato Cliente  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -105,7 +107,7 @@
                                             </button>
                                         </div>
                                         @endif
-                                        @foreach ($contratocliente as $cli)
+                                        @foreach ($contratos as $cli)
                                         @if ($cli->cliente)
                                         <tr>
                                             <td>
@@ -150,7 +152,7 @@
 
                                                         <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
                                                         <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -191,7 +193,7 @@
                             </div>
                         </div>
                         <div id="showfornecedor" class="form-group-md-2">
-                            <!--  Tabela Contrato Fornecedor  -->
+                         <!--  Tabela Contrato Fornecedor  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -214,7 +216,7 @@
                                             </button>
                                         </div>
                                         @endif
-                                        @foreach ($contratofornecedor as $cli)
+                                        @foreach ($contratos as $cli)
                                         @if ($cli->fornecedor)
                                         <tr>
                                             <td>
@@ -258,7 +260,7 @@
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                         <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
                                                         <a class="dropdown-item" href="#{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -298,7 +300,7 @@
                             </div>
                         </div>
                         <div id="showfuncionario" class="form-group-md-2">
-                            <!--  Tabela Contrato Funcionario  -->
+                         <!--  Tabela Contrato Funcionario  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -321,7 +323,7 @@
                                             </button>
                                         </div>
                                         @endif
-                                        @foreach ($contratofuncionario as $cli)
+                                        @foreach ($contratos as $cli)
                                         @if ($cli->funcionario)
                                         <tr>
                                             <td>
@@ -365,7 +367,7 @@
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                         <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
                                                         <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -405,7 +407,7 @@
                             </div>
                         </div>
                         <div id="showprestador" class="form-group-md-2">
-                            <!--  Tabela Contrato Prestador  -->
+                         <!--  Tabela Contrato Prestador  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -428,7 +430,7 @@
                                             </button>
                                         </div>
                                         @endif
-                                        @foreach ($contratoprestador as $cli)
+                                        @foreach ($contratos as $cli)
                                         @if ($cli->prestador)
                                         <tr>
                                             <td>
@@ -472,7 +474,7 @@
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                         <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
                                                         <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="#">Alterar Pagamento</a>
+                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -511,10 +513,7 @@
 
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
         </div>

@@ -55,10 +55,7 @@ class ContratosController extends Controller
     public function show123()
     {
         
-        $contratocliente = Contrato::with('Cliente')->get();
-        $contratofornecedor = Contrato::with('Cliente')->get();
-        $contratofuncionario = Contrato::with('Cliente')->get();
-        $contratoprestador = Contrato::with('Cliente')->get();
+        $contratos = Contrato::with('Cliente')->get();
                 
         $clientestabela = Cliente::all();
         $contratotabela = Contrato::all();
@@ -66,10 +63,7 @@ class ContratosController extends Controller
         $funcionariotabela = Funcionario::all();
         $prestadortabela = Prestador::all();
         return view('pages.cadastro.register', compact(
-            'contratocliente',
-            'contratofornecedor',
-            'contratofuncionario',
-            'contratoprestador',
+            'contratos',
             'clientestabela',
             'fornecedortabela',
             'funcionariotabela',

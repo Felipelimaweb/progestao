@@ -54,7 +54,13 @@ Route::get('cadastrocontrato/del/{id}', [ContratosController::class, 'destroy'])
 Route::get('cadastrocontrato/{id}', [ContratosController::class, 'edit'])->name('editar_contrato');
 Route::post('cadastrocontrato/{id}', [ContratosController::class, 'update'])->name('atualizar_contrato');
 /* Rotas da notafiscal */
+//Route::post('cadastronotafiscal/{id}', [NotafiscalController::class, 'create'])->name('salvar_notafiscal');
+Route::get('cadastronotafiscal/del/{id}', [NotafiscalController::class, 'destroy'])->name('excluir_notafiscal');
+Route::get('cadastronotafiscals/{id}', [NotafiscalController::class, 'create'])->name('incluir_notafiscal');
 Route::post('cadastronotafiscal/novo', [NotafiscalController::class, 'store'])->name('salvar_notafiscal');
+Route::get('cadastronotafiscal/{id}', [NotafiscalController::class, 'edit'])->name('editar_notafiscal');
+Route::post('cadastronotafiscal/{id}', [NotafiscalController::class, 'update'])->name('atualizar_notafiscal');
+
 Route::get('/', function () {
 	return view('welcome');
 });
@@ -72,9 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	
 
-	Route::get('Pagamento-Depesas', function () {
-		return view('pages.pagamentodespesa');
-	})->name('pagamentodespesa');
+	Route::get('Pagamento-Depesas', [NotafiscalController::class, 'shownotaspendentes'])->name('pagamentodespesa');
 
 	Route::get('Registro-De-Receitas', function () {
 		return view('pages.registroreceita');
@@ -83,9 +87,9 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::get('Cadastro', [ContratosController::class, 'show123'])->name('register');
 	
-	Route::get('Notas-Fiscais', [NotafiscalController::class, 'show123'])->name('notafiscal');
+	Route::get('Notas-Fiscais', [NotafiscalController::class, 'shownotafiscal'])->name('notafiscal');
 
-	Route::get('Receitas', [ClientesController::class, 'show1'])->name('showreceita');
+	Route::get('Receitas', [NotafiscalController::class, 'shownotasclientes'])->name('showreceita');
 
 	Route::get('Cadastro-Cliente', [ClientesController::class, 'show'])->name('registercliente');
 	

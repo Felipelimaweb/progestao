@@ -15,7 +15,7 @@ class CreateNotafiscalsTable extends Migration
     {
         Schema::create('notafiscals', function (Blueprint $table) {
             $table->bigIncrements( column:'id');
-            $table->foreignId('contratos_id')->nullable()->constrained();
+            $table->foreignId('contrato_id')->nullable()->constrained();
             $table->string('nome');
             $table->string('valor');
             $table->string('data');

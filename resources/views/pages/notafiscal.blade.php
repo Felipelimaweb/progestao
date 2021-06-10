@@ -34,7 +34,15 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Notas Fiscais</h6>
+                            <h6 class="h2 text-white d-inline-block mb-0">Contratos</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></a></i></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('contrato') }}">Cadastro de Contrato</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('register') }}">Lista de Contratos</a></li>
+                                    <li class="breadcrumb-item">Notas Fiscais</li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -46,110 +54,141 @@
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <!-- Formulario de Registro -->
-                        <form action="{{ route('salvar_notafiscal') }}" method="POST">
-                            @csrf
-                            @if (session('status'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('status') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                            @if (session('status1'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('status1') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                            <!-- Script Seleção Tipo -->
-                            <div class="form-group ml-1">
-                                <select name="tipo" id="tipo" class="form-control">
+                        
+                        @csrf
+                        @if (session('status1'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('status1') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        <div class="row">
+                            <div class="col">
+                                <div class="card bg-default shadow">
+                                    <div class="card-header bg-transparent border-0">
+                                        <h3 class="text-white mb-0">Notas Fiscais</h3>
+                                    </div>
+                                    <!-- Tabela de notas fiscais  -->
+                                    <div class="table-responsive">
+                                        <table class="table align-items-center table-dark table-flush">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col" class="sort" data-sort="Nome">Nome do Cliente</th>
+                                                    <th scope="col" class="sort" data-sort="Nome">Contrato</th>
+                                                    <th scope="col" class="sort" data-sort="Nome">Numero da Nota</th>
+                                                    <th scope="col" class="sort" data-sort="Valor">Valor</th>
+                                                    <th scope="col" class="sort" data-sort="Data">Data</th>
+                                                    <th scope="col" class="sort" data-sort="Confirmação">Confirmação</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody class="list">
+                                                @csrf
+                                                @foreach ($notafiscals as $nota)
+                                                <tr>
+                                                    <td>
+                                                    @if ($nota->contrato->cliente)
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->contrato->cliente->nome}} </span>
+                                                        </div>
+                                                    @endif
+                                                    @if ($nota->contrato->prestador)
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->contrato->prestador->nome}} </span>
+                                                        </div>
+                                                    @endif
+                                                    @if ($nota->contrato->fornecedor)
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->contrato->fornecedor->nome}} </span>
+                                                        </div>
+                                                    @endif
+                                                    @if ($nota->contrato->funcionario)
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->contrato->funcionario->nome}} </span>
+                                                        </div>
+                                                    @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->contrato->nome}} </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->nome}} </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->valor}} </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->data}} </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-right"> {{$nota->confirmação}} </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <div class="dropdown">
+                                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                                <a class="dropdown-item" href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}">Editar</a>
+                                                                <a class="dropdown-item" href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}">Remover</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                                @endforeach
 
-                                    <option value="0">Selecione o Tipo</option>
-                                    <option value="cli">Cliente</option>
-                                    <option value="for">Fornecedor</option>
-                                    <option value="fun">Funcionario</option>
-                                    <option value="pre">Prestador</option>
 
-                                </select>
-                            </div>
-                            <div id="showcliente" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscacliente" name="cliente_id" class="form-control">
-                                        <option value="">Selecione o Cliente:</option>
-                                        @foreach ($clientestabela as $cliente)
-                                        <option value="{{$cliente->id}}">{{$cliente->nome}}</option>
-                                        @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="card-footer py-4">
+                                            <nav aria-label="...">
+                                                <ul class="pagination justify-content-end mb-0">
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" tabindex="-1">
+                                                            <i class="fas fa-angle-left"></i>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item active">
+                                                        <a class="page-link" href="#">1</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#">
+                                                            <i class="fas fa-angle-right"></i>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
 
-                                    </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="showfornecedor" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscafornecedor" name="fornecedor_id" class="form-control">
-                                        <option value="">Selecione o Fornecedor:</option>
-                                        @foreach ($fornecedortabela as $fornecedor)
-                                        <option value="{{$fornecedor->id}}">{{$fornecedor->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="showfuncionario" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscafuncionario" name="funcionario_id" class="form-control">
-                                        <option value="">Selecione o Funcionario:</option>
-                                        @foreach ($funcionariotabela as $funcionario)
-                                        <option value="{{$funcionario->id}}">{{$funcionario->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="showprestador" class="form-group-md-2">
-                                <div class="form-group">
-                                    <select id="buscaprestador" name="prestador_id" class="form-control">
-                                        <option value="">Selecione o Prestador:</option>
-                                        @foreach ($prestadortabela as $prestador)
-                                        <option value="{{$prestador->id}}">{{$prestador->nome}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Selecione o contrato</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Exemplo Contrato</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Numero da Nota</label>
-                                <input type="text" class="form-control" name="nome">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Valor</label>
-                                <input type="text" class="form-control" name="valor">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Confirmação de Pagamento</label>
-                                <select class="form-control" name="confirmação">
-                                    <option value="Pendente">Pendente</option>
-                                    <option value="Confirmado">Confirmado</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success ">Salvar</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -158,62 +197,10 @@
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
     <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
     <!-- Argon JS -->
-    <script>
-        $('#nameField').css('display', 'block'); // Esconde a caixa de texto por padrão
-        function myFunction() {
-            if ($('#showField').prop('checked')) {
-                $('#nameField').css('display', 'none');
-            } else {
-                $('#nameField').css('display', 'block');
-            }
-        }
-    </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script type="text/javascript">
-        $("#buscacliente").select2();
-        $("#buscafornecedor").select2();
-        $("#buscafuncionario").select2();
-        $("#buscaprestador").select2();
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#showcliente').closest('div').hide();
-            $('#showfornecedor').closest('div').hide();
-            $('#showfuncionario').closest('div').hide();
-            $('#showprestador').closest('div').hide();
-            $('#tipo').change(function() {
-                var tipoescolhido = $('#tipo option:selected').text();
-                if (tipoescolhido == 'Cliente') {
-                    debugger
-                    $('#showcliente').closest('div').show();
-                } else {
-                    $('#showcliente').closest('div').hide();
-                }
-                if (tipoescolhido == 'Fornecedor') {
-                    debugger
-                    $('#showfornecedor').closest('div').show();
-                } else {
-                    $('#showfornecedor').closest('div').hide();
-                }
-                if (tipoescolhido == 'Funcionario') {
-                    debugger
-                    $('#showfuncionario').closest('div').show();
-                } else {
-                    $('#showfuncionario').closest('div').hide();
-                }
-                if (tipoescolhido == 'Prestador') {
-                    debugger
-                    $('#showprestador').closest('div').show();
-                } else {
-                    $('#showprestador').closest('div').hide();
-                }
 
-
-            });
-        });
-    </script>
 </body>
 
 </html>

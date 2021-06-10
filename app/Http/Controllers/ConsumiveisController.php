@@ -6,6 +6,8 @@ use App\Models\Consumivel;
 use App\Models\Funcionario;
 use App\Models\Prestador;
 use App\Models\Fornecedor;
+use App\Models\Contrato;
+use App\Models\Notafiscal;
 use Illuminate\Http\Request;
 
 class ConsumiveisController extends Controller
@@ -32,13 +34,15 @@ class ConsumiveisController extends Controller
 
     public function show(){
 
+        $contratos = Contrato::with('Cliente')->get();
+        $notafiscals = Notafiscal::all();
+        
         $funcionarios = Funcionario::all();
-        $total_salario = Funcionario::sum('salario');
         $prestadores = Prestador::all();
         $consumiveis = Consumivel::all();
-        $total_consumiveis = Consumivel::sum('valor');
         $fornecedores = Fornecedor::all();
-        return view('pages.despesa',compact('funcionarios', 'prestadores', 'total_salario', 'consumiveis', 'total_consumiveis', 'fornecedores'));
+
+        return view('pages.despesa',compact('contratos', 'notafiscals', 'funcionarios', 'prestadores', 'consumiveis', 'fornecedores'));
 
        
     }

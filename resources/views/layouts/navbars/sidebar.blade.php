@@ -96,28 +96,30 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contrato') }}">
-                        <i class="ni ni-single-copy-04 text-black"></i> {{ __('Contratos') }}
+                <a class="nav-link active" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                        <i class="ni ni-single-copy-04 text-black"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Contratos') }}</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                    <div class="collapse show" id="navbar-examples2">
+                    <ul class="nav nav-sm flex-column">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('contrato') }}">
+                        <i class="ni ni-single-copy-04 text-black"></i> {{ __('Cadastro de Contratos') }}
+                    </a>
+                    <a class="nav-link" href="{{ route('register') }}">
+                        <i class="ni ni-archive-2 text-black"></i> {{ __('Lista de Contratos') }}
+                    </a>
                     <a class="nav-link" href="{{ route('notafiscal') }}">
                         <i class="ni ni-archive-2 text-black"></i> {{ __('Notas Fiscais') }}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">
-                        <i class="ni ni-archive-2 text-black"></i> {{ __('CadastroNotaFiscal') }}
-                    </a>
-                </li>
+                    </ul>
                 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link active" href="#navbar-examples3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="ni ni-settings text-gray"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Cadastro') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse show" id="navbar-examples3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('registercliente') }}">
@@ -142,12 +144,12 @@
                         </ul>
                     </div>
                     <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link active" href="#navbar-examples4" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="ni ni-single-02 text-blue"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Usuarios') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse show" id="navbar-examples4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('profile.edit') }}">

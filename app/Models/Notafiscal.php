@@ -13,6 +13,7 @@ class Notafiscal extends Model
         'valor',
         'data',
         'confirmação',
+        'contrato_id',
     
     ];
     public function contrato()

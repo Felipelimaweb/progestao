@@ -51,10 +51,12 @@
             </div>
         </div>
         <!-- Conteudo da Pagina -->
+        @csrf
         <div class="container-fluid mt--7">
             <div class="row">
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card card-stats mb-4 mb-xl-0">
+                <!-- Tabela de Consumiveis -->
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -85,13 +87,14 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Valor Total: {{number_format($total_consumiveis, 0, ',', '.')}}</span>
+                                <span class="h2 font-weight-bold mb-0">Valor Total:</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card card-stats mb-4 mb-xl-0">
+                <!-- Tabela de Prestadores -->
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -107,25 +110,35 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
-                                            <th scope="col">CNPJ</th>
+                                            <th scope="col">Contrato</th>
+                                            <th scope="col">Nota Fiscal</th>
+                                            <th scope="col">Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
-
-                                        @foreach ($prestadores as $prestador)
+                                        @foreach ($notafiscals as $nota)
+                                        @if ($nota->contrato->prestador)
                                         <tr>
-                                            <td>{{$prestador->nome}}</td>
-                                            <td>{{$prestador->cnpj}}</td>
+                                            <td>{{$nota->contrato->prestador->nome}}</td>
+                                            <td>{{$nota->contrato->nome}}</td>
+                                            <td>{{$nota->nome}}</td>
+                                            <td>{{$nota->valor}}</td>
                                         </tr>
+                                        @endif
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Total: {{count($prestadores)}}</span>
+                                @foreach ($notafiscals as $nota)
+                                @if ($nota->contrato->prestador)
+                                <span class="h2 font-weight-bold mb-0">Total:{{$nota->sum('valor')}}</span>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
+                <!-- Tabela de Funcionarios -->
+                <div class="col-xl-6 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body">
                             <div class="row">
@@ -143,25 +156,33 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
-                                            <th scope="col">Salario</th>
+                                            <th scope="col">Contrato</th>
+                                            <th scope="col">Nota Fiscal</th>
+                                            <th scope="col">Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
-                                        @foreach ($funcionarios as $funcionario)
+                                    
+                                        @foreach ($notafiscals as $nota)
+                                        @if ($nota->contrato->funcionario)
                                         <tr>
-                                            <td>{{$funcionario->nome}}</td>
-                                            <td>{{$funcionario->salario}}</td>
+                                            <td>{{$nota->contrato->funcionario->nome}}</td>
+                                            <td>{{$nota->contrato->nome}}</td>
+                                            <td>{{$nota->nome}}</td>
+                                            <td>{{$nota->valor}}</td>
                                         </tr>
+                                        @endif
                                         @endforeach
 
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Total: {{number_format($total_salario, 0, ',', '.')}}</span>
+                                <span class="h2 font-weight-bold mb-0">Total:</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
+                <!-- Tabela de Fornecedores -->
+                <div class="col-xl-6 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body">
                             <div class="row">
@@ -178,20 +199,26 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Nome</th>
-                                            <th scope="col">CNPJ</th>
+                                            <th scope="col">Contrato</th>
+                                            <th scope="col">Nota Fiscal</th>
+                                            <th scope="col">Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
-                                        @foreach ($fornecedores as $fornecedor)
+                                    @foreach ($notafiscals as $nota)
+                                        @if ($nota->contrato->fornecedor)
                                         <tr>
-                                            <td>{{$fornecedor->nome}}</td>
-                                            <td>{{$fornecedor->cnpj}}</td>
+                                            <td>{{$nota->contrato->fornecedor->nome}}</td>
+                                            <td>{{$nota->contrato->nome}}</td>
+                                            <td>{{$nota->nome}}</td>
+                                            <td>{{$nota->valor}}</td>
                                         </tr>
+                                        @endif
                                         @endforeach
 
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Total: {{count($fornecedores)}}</span>
+                                <span class="h2 font-weight-bold mb-0">Total:</span>
                             </div>
                         </div>
 

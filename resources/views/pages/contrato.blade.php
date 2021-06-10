@@ -35,17 +35,14 @@
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
                             <h6 class="h2 text-white d-inline-block mb-0">Contratos</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a>Cadastro</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Contratos</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></a></i></li>
+                                    <li class="breadcrumb-item">Cadastro de Contrato</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('register') }}">Lista de Contratos</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('notafiscal') }}">Notas Fiscais</a></li>
                                 </ol>
                             </nav>
-                        </div>
-                        <div class="col-lg-6 col-5 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral">Novo</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Filtros</a>
                         </div>
                     </div>
                 </div>

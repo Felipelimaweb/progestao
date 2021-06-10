@@ -73,8 +73,10 @@
                             </div>
                             @endif
                             
-                            <input value="{{$contrato->cliente_id}}">
-                            <input value="{{$contrato->prestador_id}}">
+                            <input type="hidden" name="cliente_id" value="{{$contrato->cliente_id}}">
+                            <input type="hidden" name="prestador_id" value="{{$contrato->prestador_id}}">
+                            <input type="hidden" name="fornecedor_id" value="{{$contrato->fornecedor_id}}">
+                            <input type="hidden" name="funcionario_id" value="{{$contrato->funcionario_id}}">
                             <div class="form-group ml-1">
                                 <label>Nome ou Numero do Contrato</label>
                                 <input type="text" class="form-control" name="nome" value="{{$contrato->nome}}">
@@ -85,7 +87,7 @@
 
                             <div class="form-group ml-1">
                                 <label>Data de Inicio</label>
-                                <input class="form-control @if($errors->has('datainicial')) is-invalid @endif" type="date" name="datainicial" value="{{$contrato->datainical}}">
+                                <input class="form-control @if($errors->has('datainicial')) is-invalid @endif" type="date" name="datainicial" value="{{$contrato->datainicial}}">
                                 <div class="invalid-feedback">
                                     <p>Data é Obrigatória</p>
                                 </div>
@@ -102,8 +104,9 @@
                                 <label> Despesa Fixa</label>
 
                             </div>
+                            
                             <div class="form-group custom-radio custom-control-inline ml-0 mb-3">
-                                <input type="radio" name="tipo" value="Despesa Variavel">
+                                <input type="radio" name="tipo" value="Despesa Variavel" >
                                 <label> Despesa Variavel</label>
                             </div>
                             <div class="form-group ml-1">
