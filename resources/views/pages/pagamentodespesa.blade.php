@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    
     <!-- Sidenav BarraLateral -->
     @include('layouts.navbars.sidebar')
     <!-- Conteudo Principal -->
@@ -28,16 +29,16 @@
         <!-- Topnav BarraTopo -->
         @include('layouts.navbars.topnav')
         <!-- Cabeçalho -->
-        <div class="header bg-primary py-6">
-            <div class="container-fluid">
-                <div class="header-body">
+        <div class="header bg-gradient-gray py-6">
+            <div class="container-fluid ">
+                <div class="header-body ">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Pagamento Despesa</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <h6 class="h2 text-black d-inline-block mb-2">Pagamento Despesa</h6><br>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('showdespesa') }}">Despesas</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home text-dark"></i></a></li>
+                                    <li class="breadcrumb-item "><a class="text-gray" href="{{ route('showdespesa') }}">Despesas</a></li>
                                     <li class="breadcrumb-item"><a>Pagamento Despesas</a></li>
                                 </ol>
                             </nav>
@@ -47,12 +48,12 @@
             </div>
         </div>
         <!-- Conteudo da Pagina -->
-        <div class="container-fluid mt--7">
-            <div class="row">
+        <div class="container-fluid  mt--7">
+            <div class="row ">
                 <div class="col">
-                    <div class="card">
+                    <div class="card bg-light">
                         <!-- Cabeçalho do Card -->
-                        <div class="card-header border-0">
+                        <div class="card-header bg-light border-0">
                             <h3 class="mb-0">Consumivel</h3>
                         </div>
                         <!-- Formulario de Registro Consumivel -->
@@ -67,7 +68,7 @@
                             </div>
                             @endif
                             @if (session('status1'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div class="alert alert-red alert-dismissible fade show" role="alert">
                                 {{ session('status1') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -79,13 +80,13 @@
                                 <label for="">Cadastro de Consumivel</label>
                                 <input type="checkbox" name="showField" id="showField" value="yes" onchange="myFunction()"><br />
                                 <span id="nameField">
-                                    <div class="custom-control custom-radio custom-control-inline ml-0">
-                                        <input type="checkbox" name="sede" class="custom-control-input1" value=IPTVBRASIL>
+                                    <div class="form-group custom-radio custom-control-inline ml-0">
+                                        <input type="radio" name="sede" required class="custom-control-input1" value=IPTVBRASIL>
                                         <label class="custom-control-label1" for="123">  IPTVBRASIL</label>
 
                                     </div>
-                                    <div class="custom-control custom-radio custom-control-inline ml-0 mb-3">
-                                        <input type="checkbox" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
+                                    <div class="form-group custom-radio custom-control-inline ml-0 mb-3">
+                                        <input type="radio" name="sede" class="custom-control-input1" value=PRÓEMPRESA>
                                         <label class="custom-control-label1" for="1234">  PRÓEMPRESA</label>
                                     </div>
                                     <div class="form-group ml-1">
@@ -109,9 +110,9 @@
                             </div>
                         </form>
                         <!-- Tabela Pagamentos Pendentes -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-dark table-flush">
-                                <thead class="thead-dark">
+                        <div class="table-responsive ">
+                            <table class="table align-items-center table-light table-flush">
+                                <thead class="thead-secondary">
                                     <tr>
                                         <th scope="col" class="sort" data-sort="Nome">Nome do Cliente</th>
                                         <th scope="col" class="sort" data-sort="Nome">Contrato</th>
@@ -192,7 +193,7 @@
 
                                 </tbody>
                             </table>
-                            <div class="card-footer py-4">
+                            <div class="card-footer bg-light py-4">
                                 <nav aria-label="...">
                                     <ul class="pagination justify-content-end mb-0">
                                         <li class="page-item disabled">
@@ -202,7 +203,7 @@
                                             </a>
                                         </li>
                                         <li class="page-item active">
-                                            <a class="page-link" href="#">1</a>
+                                            <a class="page-link bg-dark" href="#">1</a>
                                         </li>
                                         <li class="page-item">
                                             <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
@@ -219,29 +220,7 @@
                             </div>
 
                         </div>
-                        <!-- Formularios -->
-                        <form>
-                            <!-- Botão Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Selecione</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Selecione o contrato
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                            <button type="button" class="btn btn-primary">Salvar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
@@ -255,6 +234,7 @@
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -271,6 +251,14 @@
             }
         }
     </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datetimepicker({
+                language: 'pt-BR'
+            });
+        });
+    </script>
+
 </body>
 
 </html>

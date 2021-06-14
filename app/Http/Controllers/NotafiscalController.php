@@ -31,7 +31,7 @@ class NotafiscalController extends Controller
             'contrato_id' => $request->contrato_id,
         ]);
 
-            return back()->withStatus(__('NotaFiscal cadastrada com sucesso.'));;
+            return back()->withStatus1(__('NotaFiscal cadastrada com sucesso.'));;
 
     }
 

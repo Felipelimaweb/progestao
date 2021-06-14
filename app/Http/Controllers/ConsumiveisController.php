@@ -9,6 +9,7 @@ use App\Models\Fornecedor;
 use App\Models\Contrato;
 use App\Models\Notafiscal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumiveisController extends Controller
 {
@@ -36,13 +37,19 @@ class ConsumiveisController extends Controller
 
         $contratos = Contrato::with('Cliente')->get();
         $notafiscals = Notafiscal::all();
-        
+        // somar o valor do cadastro quando a nota fiscal tiver o cadastro        
+        $somanotaprestador = Notafiscal::join('contratos', 'contratos.id', '=', 'notafiscals.contrato_id')->whereNotNull('contratos.prestador_id');
+        $somanotafuncionario = Notafiscal::join('contratos', 'contratos.id', '=', 'notafiscals.contrato_id')->whereNotNull('contratos.funcionario_id');
+        $somanotafornecedor = Notafiscal::join('contratos', 'contratos.id', '=', 'notafiscals.contrato_id')->whereNotNull('contratos.fornecedor_id');    
+        $total_prestador = $somanotaprestador->sum('notafiscals.valor');
+        $total_funcionario = $somanotafuncionario->sum('notafiscals.valor');
+        $total_fornecedor = $somanotafornecedor->sum('notafiscals.valor');
         $funcionarios = Funcionario::all();
         $prestadores = Prestador::all();
         $consumiveis = Consumivel::all();
         $fornecedores = Fornecedor::all();
 
-        return view('pages.despesa',compact('contratos', 'notafiscals', 'funcionarios', 'prestadores', 'consumiveis', 'fornecedores'));
+        return view('pages.despesa',compact('contratos', 'total_prestador', 'total_funcionario', 'total_fornecedor', 'notafiscals', 'funcionarios', 'prestadores', 'consumiveis', 'fornecedores'));
 
        
     }

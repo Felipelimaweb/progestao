@@ -87,7 +87,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Valor Total:</span>
+                                <span class="h2 font-weight-bold mb-0">Valor Total: {{$consumiveis->sum('valor')}}</span>
                             </div>
                         </div>
                     </div>
@@ -128,11 +128,11 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                @foreach ($notafiscals as $nota)
-                                @if ($nota->contrato->prestador)
-                                <span class="h2 font-weight-bold mb-0">Total:{{$nota->sum('valor')}}</span>
-                                @endif
-                                @endforeach
+                                
+                                
+                                <span class="h2 font-weight-bold mb-0">Total: {{$total_prestador}} </span>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
 
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Total:</span>
+                                <span class="h2 font-weight-bold mb-0">Total: {{$total_funcionario}}</span>
                             </div>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
 
                                     </tbody>
                                 </table>
-                                <span class="h2 font-weight-bold mb-0">Total:</span>
+                                <span class="h2 font-weight-bold mb-0">Total: {{$total_fornecedor}}</span>
                             </div>
                         </div>
 

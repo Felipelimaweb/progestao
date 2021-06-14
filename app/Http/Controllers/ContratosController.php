@@ -49,7 +49,7 @@ class ContratosController extends Controller
         $fornecedortabela = Fornecedor::all();
         $funcionariotabela = Funcionario::all();
         $prestadortabela = Prestador::all();
-        return view('pages.contrato', compact('clientestabela', 'fornecedortabela', 'funcionariotabela', 'prestadortabela'));
+        return view('pages.cadastro.registercontrato', compact('clientestabela', 'fornecedortabela', 'funcionariotabela', 'prestadortabela'));
     }
 
     public function show123()
@@ -62,7 +62,7 @@ class ContratosController extends Controller
         $fornecedortabela = Fornecedor::all();
         $funcionariotabela = Funcionario::all();
         $prestadortabela = Prestador::all();
-        return view('pages.cadastro.register', compact(
+        return view('pages.cadastro.listadecontratos', compact(
             'contratos',
             'clientestabela',
             'fornecedortabela',

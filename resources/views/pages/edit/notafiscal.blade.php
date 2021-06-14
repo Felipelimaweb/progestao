@@ -34,7 +34,15 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Notas aaFiscais</h6>
+                            <h6 class="h2 text-white d-inline-block mb-2">Notas Fiscais</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></a></i></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('contrato') }}">Cadastro de Contrato</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('register') }}">Lista de Contratos</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('notafiscal') }}">Notas Fiscais<a></li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -60,30 +68,30 @@
                             @if ($notafiscal->contrato->cliente)
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nome do Cliente</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->cliente->nome}}" disabled readonly>
+                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->cliente->nome}}" disabled>
                             </div>
                             @endif
                             @if ($notafiscal->contrato->prestador)
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nome do Prestador</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->prestador->nome}}" disabled readonly>
+                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->prestador->nome}}" disabled>
                             </div>
                             @endif
                             @if ($notafiscal->contrato->fornecedor)
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nome do Fornecedor</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->fornecedor->nome}}" disabled readonly>
+                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->fornecedor->nome}}" disabled>
                             </div>
                             @endif
                             @if ($notafiscal->contrato->funcionario)
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nome do Funcionario</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->funcionario->nome}}" disabled readonly>
+                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->funcionario->nome}}" disabled>
                             </div>
                             @endif
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nome do Contrato</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->nome}}" disabled readonly>
+                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->nome}}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Numero da Nota</label>
