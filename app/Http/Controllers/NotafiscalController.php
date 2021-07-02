@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Consumivel;
 use App\Models\Contrato;
 use App\Models\Fornecedor;
 use App\Models\Funcionario;
@@ -31,7 +32,7 @@ class NotafiscalController extends Controller
             'contrato_id' => $request->contrato_id,
         ]);
 
-            return back()->withStatus1(__('NotaFiscal cadastrada com sucesso.'));;
+            return redirect('Notas-Fiscais')->withStatus2(__('NotaFiscal cadastrada com sucesso.'));;
 
     }
 
@@ -85,8 +86,8 @@ class NotafiscalController extends Controller
 
     public function shownotaspendentes(){
 
-        $notafiscals = Notafiscal::all(); 
-        return view('pages.pagamentodespesa', compact('notafiscals'));
+        $consumivels = Consumivel::all(); 
+        return view('pages.pagamentodespesa', compact('consumivels'));
     }
 
     public function shownotasclientes(){

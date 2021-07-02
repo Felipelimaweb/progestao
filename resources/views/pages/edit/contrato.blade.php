@@ -19,6 +19,7 @@
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -72,7 +73,7 @@
                                 </button>
                             </div>
                             @endif
-                            
+
                             <input type="hidden" name="cliente_id" value="{{$contrato->cliente_id}}">
                             <input type="hidden" name="prestador_id" value="{{$contrato->prestador_id}}">
                             <input type="hidden" name="fornecedor_id" value="{{$contrato->fornecedor_id}}">
@@ -85,28 +86,53 @@
                                 </div>
                             </div>
 
-                            <div class="form-group ml-1">
-                                <label>Data de Inicio</label>
-                                <input class="form-control @if($errors->has('datainicial')) is-invalid @endif" type="date" name="datainicial" value="{{$contrato->datainicial}}">
-                                <div class="invalid-feedback">
-                                    <p>Data é Obrigatória</p>
+
+                            <div class="input-daterange row align-items-start ">
+                                <div class="col-6 col-sm-2 ">
+                                    <label> Data do Contrato </label>
+                                    <div class="form-group ml-1 ">
+                                        <div class='form-group date' id='datetimepicker1'>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input type='text' class="form-control @if($errors->has('datainicial')) is-invalid @endif" name="datainicial" value="{{$contrato->datainicial}}" >
+                                                <div class="invalid-feedback">
+                                                    <p>Data é Obrigatória</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="checkbox" name="showField" id="showField" value="yes" onchange="myFunction()"> 
-                                <label for="exampleFormControlInput1">Periodo Indeterminado</label>
+                                <div class=" col-sm-01">
+                                    <input type="checkbox" name="showField" id="showField" value="yes" onchange="myFunction()">
+                                </div>
                                 <span id="nameField">
-                                    <label for="exampleFormControlInput1">Data de Termino</label>
-                                    <input class="form-control" type="date" name="datafinal" value="{{$contrato->datafinal}}">
+                                    <div class="col">
+                                        <label>Prazo indeterminado</label>
+                                        <div class="form-group ml-1 ">
+                                            <div class='form-group date' id='datetimepicker2'>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                    </div>
+                                                    <input type='text' class="form-control" name="datafinal" value="{{$contrato->datafinal}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </span>
                             </div>
+
                             <label> Tipo de Despesa</label><br>
                             <div class="form-group custom-radio custom-control-inline"> 
                                 <input type="radio" required name="tipo" value="Despesa Fixa">
                                 <label> Despesa Fixa</label>
 
                             </div>
-                            
+
                             <div class="form-group custom-radio custom-control-inline ml-0 mb-3">
-                                <input type="radio" name="tipo" value="Despesa Variavel" >
+                                <input type="radio" name="tipo" value="Despesa Variavel">
                                 <label> Despesa Variavel</label>
                             </div>
                             <div class="form-group ml-1">
@@ -168,7 +194,29 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                todayBtn: true,
+            });
+            $('#datetimepicker2').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                language: "PT-BR",
+            });
+        });
+    </script>
 </body>
 
 </html>

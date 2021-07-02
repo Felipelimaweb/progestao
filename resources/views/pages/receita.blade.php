@@ -57,103 +57,97 @@
                 <div class="col">
                     <div class="card bg-default shadow">
                         <div class="card-header bg-transparent border-0">
-                            <h3 class="text-white mb-0">Clientes</h3>
+                            <h3 class="text-white mb-0">Notas Clientes</h3>
                         </div>
                         <div class="table-responsive">
-                                        <table class="table align-items-center table-dark table-flush">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th scope="col" class="sort" data-sort="Nome">Nome do Cliente</th>
-                                                    <th scope="col" class="sort" data-sort="Nome">Contrato</th>
-                                                    <th scope="col" class="sort" data-sort="Nome">Numero da Nota</th>
-                                                    <th scope="col" class="sort" data-sort="Valor">Valor</th>
-                                                    <th scope="col" class="sort" data-sort="Data">Data</th>
-                                                    <th scope="col" class="sort" data-sort="Confirmação">Confirmação</th>
-                                                </tr>
-                                            </thead>
-                                            
-                                            <tbody class="list">
-                                                @csrf
-                                                @foreach ($notafiscals as $nota)
-                                                @if ($nota->contrato->cliente)
-                                                <tr>
-                                                    <td>
-                                                    
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->contrato->cliente->nome}} </span>
-                                                        </div>
-                                                    
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->contrato->nome}} </span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->nome}} </span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->valor}} </span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->data}} </span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <span class="text-right"> {{$nota->confirmação}} </span>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="fas fa-ellipsis-v"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                                <a class="dropdown-item" href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}">Editar</a>
-                                                                <a class="dropdown-item" href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}">Remover</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                @endif
-                                                @endforeach
+                            <table class="table align-items-center table-dark table-flush">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" class="sort" data-sort="Nome">Nome do Cliente</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Contrato</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Numero da Nota</th>
+                                        <th scope="col" class="sort" data-sort="Valor">Valor</th>
+                                        <th scope="col" class="sort" data-sort="Data">Data</th>
+                                        <th scope="col" class="sort" data-sort="Confirmação">Confirmação</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="list">
+                                    @csrf
+                                    @foreach ($notafiscals as $nota)
+                                    @if ($nota->contrato->cliente)
+                                    <tr>
+                                        <td>
+
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->contrato->cliente->nome}} </span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->contrato->nome}} </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->nome}} </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->valor}} </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->data}} </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="text-right"> {{$nota->confirmação}} </span>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                            <a href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
 
 
-                                            </tbody>
-                                        </table>
-                                        <div class="card-footer py-4">
-                                            <nav aria-label="...">
-                                                <ul class="pagination justify-content-end mb-0">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1">
-                                                            <i class="fas fa-angle-left"></i>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">
-                                                            <i class="fas fa-angle-right"></i>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+                                </tbody>
+                            </table>
+                            <div class="card-footer py-4">
+                                <nav aria-label="...">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">
+                                                <i class="fas fa-angle-left"></i>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">
+                                                <i class="fas fa-angle-right"></i>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
 
-                                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

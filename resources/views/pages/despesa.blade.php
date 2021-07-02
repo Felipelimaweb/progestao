@@ -81,7 +81,7 @@
                                         @foreach ($consumiveis as $consumivel)
                                         <tr>
                                             <td>{{$consumivel->nome}}</td>
-                                            <td>{{date( 'd/m/Y' , strtotime($consumivel->data))}}</td>
+                                            <td>{{$consumivel->data}}</td>
                                             <td>{{$consumivel->valor}}</td>
                                         </tr>
                                         @endforeach

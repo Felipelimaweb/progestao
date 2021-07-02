@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 </head>
 
 <body>
-    
+
     <!-- Sidenav BarraLateral -->
     @include('layouts.navbars.sidebar')
     <!-- Conteudo Principal -->
@@ -34,11 +35,11 @@
                 <div class="header-body ">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-black d-inline-block mb-2">Pagamento Despesa</h6><br>
+                           
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home text-dark"></i></a></li>
-                                    <li class="breadcrumb-item "><a class="text-gray" href="{{ route('showdespesa') }}">Despesas</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item "><a href="{{ route('showdespesa') }}">Despesas</a></li>
                                     <li class="breadcrumb-item"><a>Pagamento Despesas</a></li>
                                 </ol>
                             </nav>
@@ -90,16 +91,26 @@
                                         <label class="custom-control-label1" for="1234">  PRÓEMPRESA</label>
                                     </div>
                                     <div class="form-group ml-1">
-                                        <label for="exampleFormControlInput1">Nome</label>
+                                        <label for="">Nome</label>
                                         <input type="text" class="form-control" name="nome">
                                     </div>
+
                                     <div class="form-group ml-1">
-                                        <label for="exampleFormControlInput1">Data</label>
-                                        <input type="date" class="form-control" name="data">
+                                        <div class='form-group date' id='datetimepicker1'>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input type='text' class="form-control" name="data" value="15/05/2021">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group ml-1">
                                         <label for="exampleFormControlInput1">Valor</label>
-                                        <input type="text" class="form-control" name="valor">
+                                        <input type="text" class="form-control @if($errors->has('valor')) is-invalid @endif" name="valor" >
+                                        <div class="invalid-feedback">
+                                            <p>Valor é Obrigatório</p>
+                                        </div>
                                     </div>
                                     <div class="form-group ml-1">
                                         <label for="exampleFormControlInput1">Nota Fiscal</label>
@@ -114,80 +125,51 @@
                             <table class="table align-items-center table-light table-flush">
                                 <thead class="thead-secondary">
                                     <tr>
-                                        <th scope="col" class="sort" data-sort="Nome">Nome do Cliente</th>
-                                        <th scope="col" class="sort" data-sort="Nome">Contrato</th>
-                                        <th scope="col" class="sort" data-sort="Nome">Numero da Nota</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Sede</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Nome</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Data</th>
                                         <th scope="col" class="sort" data-sort="Valor">Valor</th>
-                                        <th scope="col" class="sort" data-sort="Data">Data</th>
-                                        <th scope="col" class="sort" data-sort="Confirmação">Confirmação</th>
+                                        <th scope="col" class="sort" data-sort="Data">Nota Fiscal</th>
                                     </tr>
                                 </thead>
 
                                 <tbody class="list">
                                     @csrf
-                                    @foreach ($notafiscals as $nota)
-                                    @if ($nota->confirmação == 'Pendente')
+                                    @foreach ($consumivels as $consumivel)
+                                   
                                     <tr>
                                         <td>
-                                            @if ($nota->contrato->cliente)
                                             <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->contrato->cliente->nome}} </span>
-                                            </div>
-                                            @endif
-                                            @if ($nota->contrato->prestador)
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->contrato->prestador->nome}} </span>
-                                            </div>
-                                            @endif
-                                            @if ($nota->contrato->fornecedor)
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->contrato->fornecedor->nome}} </span>
-                                            </div>
-                                            @endif
-                                            @if ($nota->contrato->funcionario)
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->contrato->funcionario->nome}} </span>
-                                            </div>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->contrato->nome}} </span>
+                                                <span class="text-right"> {{$consumivel->sede}} </span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->nome}} </span>
+                                                <span class="text-right"> {{$consumivel->nome}} </span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->valor}} </span>
+                                                <span class="text-right"> {{$consumivel->data}} </span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->data}} </span>
+                                                <span class="text-right"> {{$consumivel->valor}} </span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="text-right"> {{$nota->confirmação}} </span>
+                                                <span class="text-right"> {{$consumivel->notafiscal}} </span>
                                             </div>
                                         </td>
                                         <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}">Editar</a>
-                                                    <a class="dropdown-item" href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}">Remover</a>
-                                                </div>
+                                        <a href="{{ route('editar_consumivel', ['id'=>$consumivel->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                        <a href="{{ route('excluir_consumivel', ['id'=>$consumivel->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                             </div>
                                         </td>
                                     </tr>
-                                    @endif
+
                                     @endforeach
 
 
@@ -239,10 +221,12 @@
     <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
     <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <!-- Argon JS -->
     <script src="../assets/js/argon.js?v=1.2.0"></script>
     <script>
-        $('#nameField').css('display', 'none'); // Esconde o campo te texto por padrão
+        $('#nameField').css('display', 'block'); // Esconde o campo te texto por padrão
         function myFunction() {
             if ($('#showField').prop('checked')) {
                 $('#nameField').css('display', 'block');
@@ -253,12 +237,35 @@
     </script>
     <script type="text/javascript">
         $(function() {
-            $('#datetimepicker1').datetimepicker({
-                language: 'pt-BR'
+            var data = new Date();
+            var dia = String(data.getDate()).padStart(2, '0');
+            var mes = String(data.getMonth() + 1).padStart(2, '0');
+            var ano = data.getFullYear();
+            $dataAtual = dia + '/' + mes + '/' + ano;
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datepicker({
+                format: "dd/mm/yyyy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                todayBtn: true
+            });
+            $('#datetimepicker2').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                language: "PT-BR",
             });
         });
     </script>
-
 </body>
 
 </html>

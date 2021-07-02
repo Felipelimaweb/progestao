@@ -18,7 +18,7 @@ class CreateConsumivelsTable extends Migration
             $table->string('sede');
             $table->string('nome');
             $table->string('data');
-            $table->float('valor', 10,2);
+            $table->string('valor');
             $table->string('notafiscal');
             $table->timestamps();
         });

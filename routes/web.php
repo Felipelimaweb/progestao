@@ -47,8 +47,10 @@ Route::post('cadastrofuncionario/{id}', [FuncionariosController::class, 'update'
 Route::post('cadastroconsumivel/novo', [ConsumiveisController::class, 'store'])->name('salvar_consumivel');
 Route::get('cadastroconsumivel/del/{id}', [ConsumiveisController::class, 'destroy'])->name('excluir_consumivel');
 Route::put('cadastroconsumivel/up/{id}', [ConsumiveisController::class, 'update'])->name('update_consumivel');
+Route::get('cadastroconsumivel/{id}', [ConsumiveisController::class, 'edit'])->name('editar_consumivel');
+Route::post('cadastroconsumivel/{id}', [ConsumiveisController::class, 'update'])->name('atualizar_consumivel');
 /* Rotas do contrato */
-Route::get('Castro-de-Contrato', [ContratosController::class, 'show'])->name('contrato');
+Route::get('Cadastro-de-Contrato', [ContratosController::class, 'show'])->name('contrato');
 Route::post('cadastrocontrato/novo', [ContratosController::class, 'store'])->name('salvar_contrato');
 Route::get('cadastrocontrato/del/{id}', [ContratosController::class, 'destroy'])->name('excluir_contrato');
 Route::get('cadastrocontrato/{id}', [ContratosController::class, 'edit'])->name('editar_contrato');

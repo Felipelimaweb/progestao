@@ -19,6 +19,7 @@
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -94,15 +95,22 @@
                                 <input type="text" class="form-control" style="color:black; font-weight: bold;" value="{{$contrato->nome}}" disabled>
                             </div>
                             <div class="form-group ml-1">
-                            <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
+                                <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Numero da Nota</label>
                                 <input type="text" class="form-control" name="nome">
                             </div>
                             <div class="form-group ml-1">
-                                <label>Data</label>
-                                <input class="form-control @if($errors->has('datainicial')) is-invalid @endif" type="date" name="data">
+                            <label>Data da Nota</label>
+                                <div class='form-group date' id='datetimepicker1'>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        </div>
+                                        <input type='text' class="form-control @if($errors->has('datainicial')) is-invalid @endif" name="data" value="Ex 15/05/2020">
+                                    </div>
+                                </div>
                                 <div class="invalid-feedback">
                                     <p>Data é Obrigatória</p>
                                 </div>
@@ -125,7 +133,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -147,6 +155,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
         $("#buscacliente").select2();
         $("#buscafornecedor").select2();
@@ -187,6 +196,19 @@
                 }
 
 
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datepicker({
+                format: "dd/mm/yyyy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                todayBtn: true
             });
         });
     </script>

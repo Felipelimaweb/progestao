@@ -33,12 +33,13 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-0">Fornecedores</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a>Cadastro</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Fornecedores</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('registercliente') }}">Clientes</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a>Fornecedores</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('registerfuncionario') }}">Funcionarios</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('registerprestador') }}">Prestadores</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -80,7 +81,7 @@
                             @endif
 
                             <div class="form-group custom-control-inline ml-0">
-                                <input type="radio" class="custom-control-input1"  name="sede" value=IPTVBRASIL>
+                                <input type="radio" class="custom-control-input1" name="sede" value=IPTVBRASIL>
                                 <label class="custom-control-label1">  IPTVBRASIL</label>
 
                             </div>
@@ -124,11 +125,10 @@
                             <table class="table align-items-center table-dark table-flush">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col" class="sort" data-sort="sede">Sede</th>
-                                        <th scope="col" class="sort" data-sort="nome">Nome do Fornecedor</th>
-                                        <th scope="col" class="sort" data-sort="contrato">Contrato</th>
-                                        <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
-                                        <th scope="col" class="sort" data-sort="contrato">Valor</th>
+                                        <th scope="col" class="sort" data-sort="Sede">Sede</th>
+                                        <th scope="col" class="sort" data-sort="Nome">Nome da Empresa</th>
+                                        <th scope="col" class="sort" data-sort="CNPJ">CNPJ</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
@@ -151,16 +151,9 @@
                                             </div>
                                         </td>
                                         <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="{{ route('editar_fornecedor', ['id'=>$fornecedor->id])}}">Editar</a>
-                                                    <a class="dropdown-item" href="{{ route('excluir_fornecedor', ['id'=>$fornecedor->id])}}">Remover</a>
-                                                    <a class="dropdown-item" href="#">Vincular Contrato</a>
-                                                </div>
-                                            </div>
+                                            <!-- <a href="{{ route('incluir_notafiscal', ['id'=>$fornecedor->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Contrato</a> -->
+                                            <a href="{{ route('editar_fornecedor', ['id'=>$fornecedor->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                            <a href="{{ route('excluir_fornecedor', ['id'=>$fornecedor->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                         </td>
                                     </tr>
 

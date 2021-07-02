@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+    <link id="bsdp-css" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 </head>
 
@@ -151,39 +152,42 @@
                                     <p>Nome ou Numero do Contrato é Obrigatório</p>
                                 </div>
                             </div>
-                            <label>Data teste</label>
-                            <div class="input-group date" data-provide="datepicker">
-                                <input type="text" class="form-control">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                            </div>
-                            <div class="input-daterange datepicker row align-items-center">
-                                <div class="col">
-                                    <label>Data Inicial</label>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                            <div class="input-daterange row align-items-start ">
+                                <div class="col-6 col-sm-2 ">
+                                    <label> Data do Contrato       </label>
+                                    <div class="form-group ml-1 ">
+                                        <div class='form-group date' id='datetimepicker1'>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input type='text' class="form-control" name="datainicial" value="Data Inicial"></input>
+                                                
                                             </div>
-                                            <input class="form-control datepicker" placeholder="Data Inicial" name="datainicial" type="text" value="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <label>Data Final</label>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                <div class=" col-sm-01">
+                                <input type="checkbox" name="selectcliente" id="showField" value="yes" onchange="myFunction()">
+                                </div>
+                                <span id="nameField">
+                                    <div class="col">
+                                        <label>Prazo indeterminado</label>
+                                        <div class="form-group ml-1 ">
+                                            <div class='form-group date' id='datetimepicker2'>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                    </div>
+                                                    <input type='text' class="form-control" name="datafinal" value="Data Final">
+                                                </div>
                                             </div>
-                                            <input class="form-control" placeholder="Data Final" name="datafinal" type="text" value="06/22/2020">
                                         </div>
                                     </div>
-                                </div>
+                                </span>
                             </div>
-                            <label> Tipo de Despesa</label><br>
-                            <div class="form-group custom-radio custom-control-inline"> 
+                            <label> Tipo de Despesa</label><br>
+                            <div class="form-group custom-radio custom-control-inline ml-1 mb-1"> 
                                 <input type="radio" required name="tipo" value="Despesa Fixa">
                                 <label> Despesa Fixa</label>
 
@@ -242,6 +246,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+
     <script type="text/javascript">
         $('#nameField').css('display', 'block'); // Esconde a caixa de texto por padrão
         function myFunction() {
@@ -290,12 +296,27 @@
             });
         });
     </script>
-    <script>
-        $('#datepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            startDate: '-3d'
+    <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                todayBtn: true,
+            });
+            $('#datetimepicker2').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                language: "PT-BR",
+            });
         });
-        $(document).off('#datepicker.data-api');
     </script>
 </body>
 

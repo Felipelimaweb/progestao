@@ -54,11 +54,19 @@
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        
+
                         @csrf
                         @if (session('status1'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ session('status1') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        @if (session('status2'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('status2') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -81,34 +89,35 @@
                                                     <th scope="col" class="sort" data-sort="Valor">Valor</th>
                                                     <th scope="col" class="sort" data-sort="Data">Data</th>
                                                     <th scope="col" class="sort" data-sort="Confirmação">Confirmação</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
-                                            
+
                                             <tbody class="list">
                                                 @csrf
                                                 @foreach ($notafiscals as $nota)
                                                 <tr>
                                                     <td>
-                                                    @if ($nota->contrato->cliente)
+                                                        @if ($nota->contrato->cliente)
                                                         <div class="d-flex align-items-center">
                                                             <span class="text-right"> {{$nota->contrato->cliente->nome}} </span>
                                                         </div>
-                                                    @endif
-                                                    @if ($nota->contrato->prestador)
+                                                        @endif
+                                                        @if ($nota->contrato->prestador)
                                                         <div class="d-flex align-items-center">
                                                             <span class="text-right"> {{$nota->contrato->prestador->nome}} </span>
                                                         </div>
-                                                    @endif
-                                                    @if ($nota->contrato->fornecedor)
+                                                        @endif
+                                                        @if ($nota->contrato->fornecedor)
                                                         <div class="d-flex align-items-center">
                                                             <span class="text-right"> {{$nota->contrato->fornecedor->nome}} </span>
                                                         </div>
-                                                    @endif
-                                                    @if ($nota->contrato->funcionario)
+                                                        @endif
+                                                        @if ($nota->contrato->funcionario)
                                                         <div class="d-flex align-items-center">
                                                             <span class="text-right"> {{$nota->contrato->funcionario->nome}} </span>
                                                         </div>
-                                                    @endif
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
@@ -136,18 +145,10 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-right">
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="fas fa-ellipsis-v"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                                <a class="dropdown-item" href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}">Editar</a>
-                                                                <a class="dropdown-item" href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}">Remover</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                        <a href="{{ route('editar_notafiscal', ['id'=>$nota->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                                        <a href="{{ route('excluir_notafiscal', ['id'=>$nota->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                                 </tr>
-                                                
+
                                                 @endforeach
 
 

@@ -35,13 +35,13 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-                            <h6 class="h2 text-white d-inline-block mb-2">Notas Fiscais</h6>
+                           
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-0">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></a></i></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('contrato') }}">Cadastro de Contrato</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('register') }}">Lista de Contratos</a></li>
-                                    <li class="breadcrumb-item"><a href="{{ route('notafiscal') }}">Notas Fiscais<a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('showdespesa') }}">Despesas</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('pagamentodespesa') }}">Pagamento Despesas</a></li>
+                                    <li class="breadcrumb-item">Consumivel</li>
                                 </ol>
                             </nav>
                         </div>
@@ -56,7 +56,7 @@
                 <div class="col">
                     <div class="card">
                         <!-- Formulario de Registro -->
-                        <form action="{{ route('atualizar_notafiscal', ['id' => $notafiscal->id]) }}" method="POST">
+                        <form action="{{ route('atualizar_consumivel', ['id' => $consumivel->id]) }}" method="POST">
                             @csrf
                             @if (session('status2'))
                             <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -66,39 +66,18 @@
                                 </button>
                             </div>
                             @endif
-                            @if ($notafiscal->contrato->cliente)
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nome do Cliente</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->cliente->nome}}" disabled>
-                            </div>
-                            @endif
-                            @if ($notafiscal->contrato->prestador)
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nome do Prestador</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->prestador->nome}}" disabled>
-                            </div>
-                            @endif
-                            @if ($notafiscal->contrato->fornecedor)
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nome do Fornecedor</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->fornecedor->nome}}" disabled>
-                            </div>
-                            @endif
-                            @if ($notafiscal->contrato->funcionario)
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nome do Funcionario</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->funcionario->nome}}" disabled>
-                            </div>
-                            @endif
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nome do Contrato</label>
-                                <input type="text" style="color:black; font-weight: bold;" class="form-control" name="" value="{{$notafiscal->contrato->nome}}" disabled>
+                                <label for="exampleFormControlSelect1">Sede</label>
+                                <select type="text" style="color:black; font-weight: bold;" class="form-control" name="sede" >
+                                    <option value="{{$consumivel->sede}}">{{$consumivel->sede}}</option>
+                                    <option value="PRÓEMPRESA">PRÓEMPRESA</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Numero da Nota</label>
-                                <input type="text" class="form-control" name="nome" value="{{$notafiscal->nome}}">
+                                <label for="exampleFormControlSelect1">Nome</label>
+                                <input type="text" class="form-control" name="nome" value="{{$consumivel->nome}}">
                             </div>
-                            <input type="hidden" name="contrato_id" value="{{$notafiscal->contrato->id}}">
+                            <input type="hidden" name="contrato_id" value="{{$consumivel->id}}">
                             <div class="form-group ml-1">
                                 <div class='form-group date' id='datetimepicker1'>
                                 <label>Data</label>
@@ -106,7 +85,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                         </div>
-                                        <input type='text' class="form-control @if($errors->has('data')) is-invalid @endif" name="data" value="{{$notafiscal->data}}">
+                                        <input type='text' class="form-control @if($errors->has('data')) is-invalid @endif" name="data" value="{{$consumivel->data}}">
                                     </div>
                                     <div class="invalid-feedback">
                                         <p>Data é Obrigatória</p>
@@ -115,14 +94,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Valor</label>
-                                <input type="text" class="form-control" name="valor" value="{{$notafiscal->valor}}">
+                                <input type="text" class="form-control" name="valor" value="{{$consumivel->valor}}">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Confirmação de Pagamento</label>
-                                <select class="form-control" name="confirmação">
-                                    <option value="Pendente">Pendente</option>
-                                    <option value="Confirmado">Confirmado</option>
-                                </select>
+                                <label for="exampleFormControlSelect1">Nota Fiscal</label>
+                                <input type="text" class="form-control" name="notafiscal" value="{{$consumivel->notafiscal}}">
                             </div>
                             <button type="submit" class="btn btn-success ">Salvar</button>
                         </form>
@@ -153,9 +129,17 @@
                 autoclose: true,
                 todayHighlight: true,
                 orientation: "auto",
-                todayBtn: true
+                todayBtn: true,
             });
-
+            $('#datetimepicker2').datepicker({
+                format: "dd/mm/yy",
+                weekStart: 0,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "auto",
+                language: "PT-BR",
+            });
         });
     </script>
 </body>

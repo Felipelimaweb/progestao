@@ -82,9 +82,9 @@
                             </select>
                         </div>
                         <!--  Seleção de Tabelas  -->
-                        
+
                         <div id="showcliente" class="form-group-md-2">
-                         <!--  Tabela Contrato Cliente  -->
+                            <!--  Tabela Contrato Cliente  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -95,6 +95,7 @@
                                             <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
                                             <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
                                             <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
@@ -144,17 +145,9 @@
                                                 </div>
                                             </td>
                                             <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-
-                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
-                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Nota</a>
+                                                <a href="{{ route('editar_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                                <a href="{{ route('excluir_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -193,7 +186,7 @@
                             </div>
                         </div>
                         <div id="showfornecedor" class="form-group-md-2">
-                         <!--  Tabela Contrato Fornecedor  -->
+                            <!--  Tabela Contrato Fornecedor  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -204,6 +197,7 @@
                                             <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
                                             <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
                                             <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
@@ -253,16 +247,9 @@
                                                 </div>
                                             </td>
                                             <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
-                                                        <a class="dropdown-item" href="#{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Nota</a>
+                                                <a href="{{ route('editar_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                                <a href="{{ route('excluir_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -300,7 +287,7 @@
                             </div>
                         </div>
                         <div id="showfuncionario" class="form-group-md-2">
-                         <!--  Tabela Contrato Funcionario  -->
+                            <!--  Tabela Contrato Funcionario  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -311,6 +298,7 @@
                                             <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
                                             <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
                                             <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
@@ -360,16 +348,10 @@
                                                 </div>
                                             </td>
                                             <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
-                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Nota</a>
+                                                <a href="{{ route('editar_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                                <a href="{{ route('excluir_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
+
                                             </td>
                                         </tr>
                                         @endif
@@ -407,7 +389,7 @@
                             </div>
                         </div>
                         <div id="showprestador" class="form-group-md-2">
-                         <!--  Tabela Contrato Prestador  -->
+                            <!--  Tabela Contrato Prestador  -->
                             <div class="table-responsive">
                                 <table class="table align-items-center table-dark table-flush">
                                     <thead class="thead-dark">
@@ -418,6 +400,7 @@
                                             <th scope="col" class="sort" data-sort="contrato">Nota Fiscal</th>
                                             <th scope="col" class="sort" data-sort="contrato">Valor do Contrato</th>
                                             <th scope="col" class="sort" data-sort="confirmacao">Confirmação de Pagamento</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
@@ -467,16 +450,10 @@
                                                 </div>
                                             </td>
                                             <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-ellipsis-v"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href="{{ route('editar_contrato', ['id'=>$cli->id])}}">Editar</a>
-                                                        <a class="dropdown-item" href="{{ route('excluir_contrato', ['id'=>$cli->id])}}">Remover</a>
-                                                        <a class="dropdown-item" href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}">Incluir Nota Fiscal</a>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('incluir_notafiscal', ['id'=>$cli->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Nota</a>
+                                                <a href="{{ route('editar_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
+                                                <a href="{{ route('excluir_contrato', ['id'=>$cli->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
+
                                             </td>
                                         </tr>
                                         @endif
