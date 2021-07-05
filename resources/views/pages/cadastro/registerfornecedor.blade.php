@@ -151,7 +151,7 @@
                                             </div>
                                         </td>
                                         <td class="text-right">
-                                            <!-- <a href="{{ route('incluir_notafiscal', ['id'=>$fornecedor->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Contrato</a> -->
+                                            <a href="{{ route('incluir_fornecedor', ['id'=>$fornecedor->id])}}" class="btn btn-outline-secondary" tabindex="-1" role="button">Contrato</a> 
                                             <a href="{{ route('editar_fornecedor', ['id'=>$fornecedor->id])}}" class="btn btn-outline-info" tabindex="-1" role="button">Editar</a>
                                             <a href="{{ route('excluir_fornecedor', ['id'=>$fornecedor->id])}}" class="btn btn-outline-danger" tabindex="-1" role="button">X</a>
                                         </td>

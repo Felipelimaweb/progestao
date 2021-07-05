@@ -37,7 +37,9 @@ Route::post('cadastroprestador/{id}', [PrestadoresController::class, 'update'])-
 Route::post('cadastrofornecedor/novo', [FornecedoresController::class, 'store'])->name('salvar_fornecedor');
 Route::get('cadastrofornecedor/del/{id}', [FornecedoresController::class, 'destroy'])->name('excluir_fornecedor');
 Route::get('cadastrofornecedor/{id}', [FornecedoresController::class, 'edit'])->name('editar_fornecedor');
+Route::get('contratofornecedor/{id}', [FornecedoresController::class, 'include'])->name('incluir_fornecedor');
 Route::post('cadastrofornecedor/{id}', [FornecedoresController::class, 'update'])->name('atualizar_fornecedor');
+Route::post('cadastrofornecedors/', [FornecedoresController::class, 'storefornecedor'])->name('contratofornecedor');
 /* Rotas do funcionario */
 Route::post('cadastrofuncionario/novo', [FuncionariosController::class, 'store'])->name('salvar_funcionario');
 Route::get('cadastrofuncionario/del/{id}', [FuncionariosController::class, 'destroy'])->name('excluir_funcionario');
